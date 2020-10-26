@@ -1,7 +1,8 @@
 import React from "react"
-import { Link } from "gatsby"
+import { useIntl, Link } from "gatsby-plugin-intl"
 
 const Layout = ({ location, title, children }) => {
+  const intl = useIntl()
   const rootPath = `${__PATH_PREFIX__}/`
   const isRootPath = location.pathname === rootPath
   let header

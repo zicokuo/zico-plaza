@@ -1,0 +1,17 @@
+{
+    "title": "Zico 乐园",
+    "description": "分享一下个人经验;",
+    "author": "@Zico",
+    "hello": "Hi~",
+    "welcome": "欢迎来到 Zico 乐园",
+    "title_page2": "Page two",
+    "hello_page2": "Hi from the second page",
+    "go_page2": "Go to page 2",
+    "build": "Now go build something great.",
+    "welcome_page2": "Welcome to page 2",
+    "go_back": "Go back to the homepage",
+    "notfound": {
+        "header": "NOT FOUND",
+        "description": "You just hit a route that doesn't exist... the sadness."
+    }
+}

@@ -1,9 +1,27 @@
+{% embed-service embed-options %}
 ---
 title: New Beginnings
 date: "2015-05-28T22:40:32.169Z"
 description: This is a custom description for SEO and Open Graph purposes, rather than the default generated excerpt. Simply add a description field to the frontmatter.
 ---
+{% link https://dev.to/kazz/boost-your-productivity-using-markdown-1be %}
 
+{% runkit
+// hidden setup JavaScript code goes in this preamble area
+const hiddenVar = 42
+%}
+
+// visible, reader-editable JavaScript code goes here
+console.log(hiddenVar)
+{% endrunkit %}
+
+Check out this codepen:
+
+{% github forem/forem %}
+
+{% codepen https://codepen.io/Dillion/pen/GRKLJBP tab=html,css %}
+
+The codepen shows the online text editor I created.
 Far far away, behind the word mountains, far from the countries Vokalia and
 Consonantia, there live the blind texts. Separated they live in Bookmarksgrove
 right at the coast of the Semantics, a large language ocean. A small river named
