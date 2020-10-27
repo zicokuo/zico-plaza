@@ -9,9 +9,9 @@ const Layout = ({ location, title, children }) => {
   const isRootPath = location.pathname === rootPath
   return (
     <>
+      <HeaderWidget title={title} isRootPath={isRootPath}/>
       <GlobalStyles />
       <div className="global-wrapper" data-is-root-path={isRootPath}>
-        <HeaderWidget title={title} isRootPath={isRootPath}/>
         <main>{children}</main>
         <footer>
           © {new Date().getFullYear()}, Built with

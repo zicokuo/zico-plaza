@@ -9,7 +9,6 @@ const HeaderWidget = ({
                         isRootPath = true,
                         title = null
                       }) => {
-  const Header = styled.header`${tw`flex flex-auto items-center`}`
   let HeaderLogo
   if (isRootPath) {
     HeaderLogo = ()=>(
@@ -24,6 +23,8 @@ const HeaderWidget = ({
       </Link>
     )
   }
+
+  const Header = styled.header`${tw`sticky top-0 flex flex-auto items-center bg-gray-500 bg-opacity-50 `}`
 
   return (
     <>
