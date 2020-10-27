@@ -3,20 +3,23 @@ module.exports = {
         title: `Zico Plaza`,
         author: {
             name: `Zico`,
-            summary: `who lives and works in San Francisco building useful things.`,
+            summary: `who lives and works in San Francisco building useful things.`
         },
         description: `A starter blog demonstrating what Gatsby can do.`,
         siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
         social: {
-            twitter: `kylemathews`,
-        },
+            twitter: ``
+        }
     },
-    plugins: [{
+    plugins: [
+        { resolve: `gatsby-plugin-postcss` },
+        { resolve: "gatsby-plugin-tailwindcss" },
+        {
             resolve: `gatsby-source-filesystem`,
             options: {
                 path: `${__dirname}/content/blog`,
-                name: `blog`,
-            },
+                name: `blog`
+            }
         },
         {
             resolve: `gatsby-source-filesystem`,
@@ -86,15 +89,28 @@ module.exports = {
                 // language file path
                 defaultLanguage: `cn`,
                 // option to redirect to `/ko` when connecting `/`
-                redirect: true,
+                redirect: true
             },
         },
         {
             resolve: `gatsby-transformer-remark`,
             options: {
-                plugins: [`gatsby-remark-liquid-tags`],
-            },
-        },
+                plugins: [`gatsby-remark-liquid-tags`]
+            }
+        }, {
+            resolve: `@micalgenus/gatsby-plugin-github-avatar`,
+            options: {
+                username: `zicokuo`, // Github username
+                default: null // Github userid for default image
+            }
+        }, {
+            resolve: `gatsby-plugin-styled-components`,
+            options: {
+                "pure": true
+                // Add any options here
+            }
+        }
+
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.dev/offline
         // `gatsby-plugin-offline`,

@@ -5,7 +5,7 @@ import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const BlogIndexPage = ({ data, location }) => {
+const BlogIndexPage = ({ data, location }) :JSX.Element=> {
   let intl = useIntl()
   let siteTitle = intl.formatMessage({
     id: data.site.siteMetadata?.title || `Title`,
