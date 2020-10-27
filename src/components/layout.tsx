@@ -3,6 +3,8 @@
 import React from "react"
 import { GlobalStyles } from "twin.macro"
 import HeaderWidget from "./header"
+import FooterWidget from "./footer"
+
 
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
@@ -13,12 +15,8 @@ const Layout = ({ location, title, children }) => {
       <GlobalStyles />
       <div className="global-wrapper" data-is-root-path={isRootPath}>
         <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
       </div>
+      <FooterWidget/>
     </>
   )
 }

@@ -40,15 +40,15 @@ const Bio = () => {
 
   // Set these values by editing "siteMetadata" in gatsby-config.js
   const author = data.site.siteMetadata?.author
-  const summary = data.site.siteMetadata?.summary
+  const summary = data.site.siteMetadata?.author?.summary
   const CompWrapper = styled.div`${tw`flex flex-auto flex-grow items-center`}`;
-  const AuthorName = styled.div`${tw`flex flex-auto`}`;
+  const AuthorName = styled.div`${tw`flex flex-auto flex-col`}`;
 
   return (
     <CompWrapper className={"bio"} >
-     <Avatar tw={"flex rounded-full h-32 mr-8"} />
+     <Avatar tw={"flex rounded-full h-16 mr-8"} />
       <AuthorName>
-        <FormattedMessage id={`Author`} /> :{author?.name || ` `}
+        <p><FormattedMessage id={`Author`} /> :{author?.name || ` `}</p>
         <p>{summary}</p>
       </AuthorName>
     </CompWrapper>

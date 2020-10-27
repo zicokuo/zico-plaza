@@ -24,12 +24,14 @@ const HeaderWidget = ({
     )
   }
 
-  const Header = styled.header`${tw`sticky top-0 flex flex-auto items-center bg-gray-500 bg-opacity-50 `}`
+  const Header = styled.header`${tw`sticky top-0 flex flex-auto items-center bg-gray-200 bg-opacity-75 `}`
 
   return (
     <>
       <Header>
+        <div tw="max-w-6xl m-auto h-12 flex items-center">
         <HeaderLogo></HeaderLogo>
+        </div>
       </Header>
     </>
   )

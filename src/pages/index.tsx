@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { Link, FormattedMessage, useIntl } from "gatsby-plugin-intl"
-import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
@@ -16,7 +15,6 @@ const BlogIndexPage = ({ data, location }) :JSX.Element=> {
     return (
       <Layout location={location} title={siteTitle}>
         <SEO title={intl.formatMessage({ id: `title` })} />
-        <Bio />
         <FormattedMessage id="welcome" />
         <p>
           No blog posts found. Add markdown posts to "content/blog" (or the
@@ -30,7 +28,6 @@ const BlogIndexPage = ({ data, location }) :JSX.Element=> {
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title={intl.formatMessage({ id: `title` })} />
-      <Bio />
       <FormattedMessage id="welcome" />
       <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
