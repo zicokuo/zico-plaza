@@ -7,13 +7,13 @@
 
 // @ts-ignore
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import Image from "gatsby-image"
-import { useIntl, FormattedMessage } from "gatsby-plugin-intl"
-import styled from 'styled-components'
-import tw, { css, theme } from 'twin.macro'
+import { graphql, useStaticQuery } from "gatsby"
+import { FormattedMessage } from "gatsby-plugin-intl"
+import styled from "styled-components"
+import tw from "twin.macro"
 
-import Avatar from '@micalgenus/gatsby-plugin-github-avatar';
+import Avatar from "@micalgenus/gatsby-plugin-github-avatar"
+
 const Bio = () => {
   const data = useStaticQuery(graphql`
     query BioQuery {
@@ -40,7 +40,7 @@ const Bio = () => {
 
   // Set these values by editing "siteMetadata" in gatsby-config.js
   const author = data.site.siteMetadata?.author
-
+  const summary = data.site.siteMetadata?.summary
   const CompWrapper = styled.div`${tw`flex flex-auto flex-grow items-center`}`;
   const AuthorName = styled.div`${tw`flex flex-auto`}`;
 
@@ -49,6 +49,7 @@ const Bio = () => {
      <Avatar tw={"flex rounded-full h-32 mr-8"} />
       <AuthorName>
         <FormattedMessage id={`Author`} /> :{author?.name || ` `}
+        <p>{summary}</p>
       </AuthorName>
     </CompWrapper>
   )
