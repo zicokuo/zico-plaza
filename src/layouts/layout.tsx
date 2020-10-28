@@ -2,8 +2,8 @@
 // @ts-ignore
 import React from "react"
 import { GlobalStyles } from "twin.macro"
-import HeaderWidget from "./header"
-import FooterWidget from "./footer"
+import HeaderWidget from "../components/header"
+import FooterWidget from "../components/footer"
 
 
 const Layout = ({ location, title, children }) => {

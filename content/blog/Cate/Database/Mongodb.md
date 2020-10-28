@@ -2,7 +2,9 @@
 title: mongoDb 分片副本集 开发纪要
 metaTitle: mongoDb Shard Replica Set Development Summary
 category: DataBase
-tags: MongoDB,
+tags:
+ - MongoDB
+ - Test
 createAt: 2020-02-02 09:11
 ---
 

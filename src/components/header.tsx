@@ -1,9 +1,9 @@
 //  站点头部
 // @ts-ignore
 import React from "react"
-import styled from "styled-components"
-import tw from "twin.macro"
+import tw,{styled} from "twin.macro"
 import { FormattedMessage, Link } from "gatsby-plugin-intl"
+import { AppBar } from "@material-ui/core"
 
 const HeaderWidget = ({
                         isRootPath = true,
@@ -24,16 +24,12 @@ const HeaderWidget = ({
     )
   }
 
-  const Header = styled.header`${tw`sticky top-0 flex flex-auto items-center bg-gray-200 bg-opacity-75 `}`
-
   return (
-    <>
-      <Header>
-        <div tw="max-w-6xl m-auto h-12 flex items-center">
-        <HeaderLogo></HeaderLogo>
-        </div>
-      </Header>
-    </>
+        <AppBar position={"sticky"}>
+          <div css={[tw`max-w-6xl m-auto h-12 flex items-center`]}>
+            <HeaderLogo></HeaderLogo>
+          </div>
+        </AppBar>
   )
 }
 

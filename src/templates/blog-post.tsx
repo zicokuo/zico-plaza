@@ -1,10 +1,10 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 
-import Layout from "../components/layout"
+import Layout from "../layouts/layout"
 import SEO from "../components/seo"
 
-const BlogPostTemplate = ({ data, location }) => {
+const PostPage = ({ data, location }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
@@ -60,7 +60,7 @@ const BlogPostTemplate = ({ data, location }) => {
   )
 }
 
-export default BlogPostTemplate
+export default PostPage
 
 export const pageQuery = graphql`
   query BlogPostBySlug(
@@ -73,25 +73,28 @@ export const pageQuery = graphql`
         title
       }
     }
-    markdownRemark(id: { eq: $id }) {
-      id
-      excerpt(pruneLength: 160)
-      html
-      frontmatter {
-        title
-        date(formatString: "MMMM DD, YYYY")
-        description
+      markdownRemark(id: { eq: $id }) {
+          id
+          excerpt(pruneLength: 160)
+          html
+          frontmatter {
+              title
+              date(formatString: "MMMM DD, YYYY")
+              description
+          }fields {
+              category
+              tags
+          }
       }
-    }
-    previous: markdownRemark(id: { eq: $previousPostId }) {
-      fields {
-        slug
+      previous: markdownRemark(id: { eq: $previousPostId }) {
+          fields {
+              slug
+          }
+          frontmatter {
+              title
+          }
       }
-      frontmatter {
-        title
-      }
-    }
-    next: markdownRemark(id: { eq: $nextPostId }) {
+      next: markdownRemark(id: { eq: $nextPostId }) {
       fields {
         slug
       }

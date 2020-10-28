@@ -1,8 +1,11 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { Link, FormattedMessage, useIntl } from "gatsby-plugin-intl"
-import Layout from "../components/layout"
+import Layout from "../layouts/layout"
 import SEO from "../components/seo"
+import { Chip } from "@material-ui/core"
+import tw,{styled} from "twin.macro"
+import UIHomePostList from "../ui/home/postList"
 
 const BlogIndexPage = ({ data, location }) :JSX.Element=> {
   let intl = useIntl()
@@ -10,6 +13,7 @@ const BlogIndexPage = ({ data, location }) :JSX.Element=> {
     id: data.site.siteMetadata?.title || `Title`,
   })
   let posts = data.allMarkdownRemark.nodes
+
 
   if (posts.length === 0) {
     return (
@@ -46,6 +50,9 @@ const BlogIndexPage = ({ data, location }) :JSX.Element=> {
                       <span itemProp="headline">{title}</span>
                     </Link>
                   </h2>
+                  {post.frontmatter.tags?.map(pt=>(
+                    <Chip label={pt}></Chip>
+                  ))}
                   <small>{post.frontmatter.date}</small>
                 </header>
                 <section>
@@ -61,6 +68,9 @@ const BlogIndexPage = ({ data, location }) :JSX.Element=> {
           )
         })}
       </ol>
+      <div css={[tw`grid grid-flow-row grid-cols-3 gap-4`]}>
+        <UIHomePostList posts={posts} ></UIHomePostList>
+      </div>
     </Layout>
   )
 }
@@ -84,6 +94,8 @@ export const pageQuery = graphql`
           date(formatString: "MMMM DD, YYYY")
           title
           description
+          category
+          tags
         }
       }
     }

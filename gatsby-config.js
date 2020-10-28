@@ -12,8 +12,19 @@ module.exports = {
         }
     },
     plugins: [
+        //  PostCSS 处理
         { resolve: `gatsby-plugin-postcss` },
-        { resolve: "gatsby-plugin-tailwindcss" },
+        //  Tailwind css
+        { resolve: `gatsby-plugin-tailwindcss` },
+        //  Material UI
+        {
+            resolve: `gatsby-plugin-material-ui`,
+            options: {
+                stylesProvider: {
+                    injectFirst: true
+                }
+            }
+        },
         {
             resolve: `gatsby-source-filesystem`,
             options: {
@@ -108,6 +119,17 @@ module.exports = {
             options: {
                 "pure": true
                 // Add any options here
+            }
+        }, {
+            resolve: "gatsby-plugin-categories",
+            options: {
+                templatePath: `${__dirname}/src/pages/category.tsx`
+            }
+        },
+        {
+            resolve: "gatsby-plugin-tags",
+            options: {
+                templatePath: `${__dirname}/src/pages/tag.tsx`
             }
         }
 
