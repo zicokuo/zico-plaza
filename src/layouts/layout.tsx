@@ -7,7 +7,7 @@ import FooterWidget from "../components/footer"
 
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
-  const isRootPath = location.pathname === rootPath
+  const isRootPath = location?.pathname === rootPath
   return (
     <>
       <HeaderWidget title={title} isRootPath={isRootPath} />
