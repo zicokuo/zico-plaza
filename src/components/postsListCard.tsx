@@ -15,7 +15,7 @@ const PostsListCard = ({ frontmatter, fields, excerpt }) => {
           }}
         />
         <Link to={`/${fields.slug}/`} className="btn btn-primary">
-          Read More &rarr;
+          Read More ;
         </Link>
         Posted on {frontmatter.date}
       </CardContent>
