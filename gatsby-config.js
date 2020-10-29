@@ -56,7 +56,6 @@ module.exports = {
                 shopName: `hhhtest001`,
                 // The storefront access token
                 accessToken: `cea03dbd64effd74062401daeb0312fa`,
-                apiVersion: "2020-10",
             },
         },
         {

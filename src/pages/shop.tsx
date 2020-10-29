@@ -1,11 +1,11 @@
-import { graphql } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import { useIntl } from "gatsby-plugin-intl"
 import { first } from "lodash"
 import React from "react"
 import tw, { styled } from "twin.macro"
 import SEO from "../components/seo"
 import Layout from "../layouts/layout"
-import UIPostsListWithCard, { CardItemProps } from "../ui/posts/postsList"
+import UIPostsListWithCard from "../ui/posts/postsList"
 
 type ProductItem = {
   id: string
@@ -16,12 +16,14 @@ type ProductItem = {
   images: [{ originalSrc: string }]
   publishedAt: string
 }
-const ShopIndexPage = ({ data, location }) => {
+const ShopIndexPage = ({ location }) => {
   let intl = useIntl()
+  let data = useStaticQuery(pageQuery)
   let siteTitle = intl.formatMessage({
-    id: data.site.siteMetadata?.title || `Title`,
+    id: data.site.siteMetadata?.title || `Shop`,
   })
-  let products = data.allShopifyProduct.edges
+  let products = data?.allShopifyProduct.edges
+  
   let CardBox = styled.div`
     ${tw`grid grid-cols-3 gap-4 justify-items-auto`}
   `

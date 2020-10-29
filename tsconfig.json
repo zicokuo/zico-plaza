@@ -15,10 +15,15 @@
     "experimentalDecorators": true, // 启用装饰器
     "emitDecoratorMetadata": true, // 支持装饰器上生成元数据,用来进行反射之类的操作
     "noEmit": true, // 不输出 js,源映射或声明之类的文件,单纯用来检查错误
-    "skipLibCheck": true // 跳过声明文件的类型检查,只会检查已引用的部分
+    "skipLibCheck": true, // 跳过声明文件的类型检查,只会检查已引用的部分
+    "baseUrl":".",
+    "paths": {
+      "@":["src"],
+      "@api": ["src/api"],
+    }
   },
   "exclude": ["./node_modules", "./public", "./.cache"], // 解析时,应该跳过的路径
-  "include": ["src"] // 定义包含的路径,定义在其中的声明文件都会被解析进 vscode 的智能提示
+  "include": ["src"]// 定义包含的路径,定义在其中的声明文件都会被解析进 vscode 的智能提示
 }
 
 
