@@ -27,6 +27,11 @@ export default ShopProductsPage
 
 export const query = graphql`
   {
+    site {
+      siteMetadata {
+        title
+      }
+    }
     allShopifyProduct(sort: { fields: [title] }) {
       edges {
         node {
