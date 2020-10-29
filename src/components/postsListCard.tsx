@@ -6,7 +6,6 @@ const PostsListCard = ({ frontmatter, fields, excerpt }) => {
   const title = frontmatter.title || fields.slug
 
   return (
-
     <Card className="mb-4">
       <CardContent>
         <h2 className="card-title">{title}</h2>
