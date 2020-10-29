@@ -13,9 +13,16 @@ module.exports = {
     },
     plugins: [
         //  PostCSS 处理
-        { resolve: `gatsby-plugin-postcss` },
+        {
+            resolve: `gatsby-plugin-postcss`
+        },
         //  Tailwind css
-        { resolve: `gatsby-plugin-tailwindcss` },
+        {
+            resolve: `gatsby-plugin-tailwindcss`
+        },
+        {
+            resolve: `gatsby-plugin-react-helmet`
+        },
         //  Material UI
         {
             resolve: `gatsby-plugin-material-ui`,
@@ -24,6 +31,33 @@ module.exports = {
                     injectFirst: true
                 }
             }
+        },
+        {
+            resolve: `gatsby-plugin-dynamic-routes`,
+            options: {
+                routeFilePath: `src/routes.ts`
+            }
+        },
+        {
+            resolve: `gatsby-plugin-apollo-shopify`,
+            options: {
+                shopName: `hhhtest001`,
+                accessToken: `cea03dbd64effd74062401daeb0312fa`,
+                // Optionally set the API version you want to use. For a list of available API versions,
+                // see: https://shopify.dev/concepts/about-apis/versioning/release-notes
+                // Defaults to unspecified/oldest stable
+                apiVersion: "2020-10",
+            },
+        },
+        {
+            resolve: `gatsby-source-shopify`,
+            options: {
+                // The domain name of your Shopify shop.
+                shopName: `hhhtest001`,
+                // The storefront access token
+                accessToken: `cea03dbd64effd74062401daeb0312fa`,
+                apiVersion: "2020-10",
+            },
         },
         {
             resolve: `gatsby-source-filesystem`,
@@ -118,7 +152,7 @@ module.exports = {
             resolve: `gatsby-plugin-styled-components`,
             options: {
                 "pure": true
-                // Add any options here
+                    // Add any options here
             }
         }, {
             resolve: "gatsby-plugin-categories",
@@ -131,7 +165,8 @@ module.exports = {
             options: {
                 templatePath: `${__dirname}/src/pages/tag.tsx`
             }
-        }
+        },
+
 
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.dev/offline

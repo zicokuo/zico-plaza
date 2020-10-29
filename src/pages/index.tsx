@@ -4,16 +4,15 @@ import { Link, FormattedMessage, useIntl } from "gatsby-plugin-intl"
 import Layout from "../layouts/layout"
 import SEO from "../components/seo"
 import { Chip } from "@material-ui/core"
-import tw,{styled} from "twin.macro"
-import UIHomePostList from "../ui/home/postList"
+import tw, { styled } from "twin.macro"
+import UIPostsListWithCard from "../ui/posts/postsList"
 
-const BlogIndexPage = ({ data, location }) :JSX.Element=> {
+const BlogIndexPage = ({ data, location }) => {
   let intl = useIntl()
   let siteTitle = intl.formatMessage({
     id: data.site.siteMetadata?.title || `Title`,
   })
   let posts = data.allMarkdownRemark.nodes
-
 
   if (posts.length === 0) {
     return (
@@ -50,7 +49,7 @@ const BlogIndexPage = ({ data, location }) :JSX.Element=> {
                       <span itemProp="headline">{title}</span>
                     </Link>
                   </h2>
-                  {post.frontmatter.tags?.map(pt=>(
+                  {post.frontmatter.tags?.map(pt => (
                     <Chip label={pt}></Chip>
                   ))}
                   <small>{post.frontmatter.date}</small>
@@ -68,9 +67,6 @@ const BlogIndexPage = ({ data, location }) :JSX.Element=> {
           )
         })}
       </ol>
-      <div css={[tw`grid grid-flow-row grid-cols-3 gap-4`]}>
-        <UIHomePostList posts={posts} ></UIHomePostList>
-      </div>
     </Layout>
   )
 }

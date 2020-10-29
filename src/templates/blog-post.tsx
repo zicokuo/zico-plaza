@@ -4,7 +4,7 @@ import { graphql, Link } from "gatsby"
 import Layout from "../layouts/layout"
 import SEO from "../components/seo"
 
-const PostPage = ({ data, location }) => {
+const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
@@ -60,7 +60,7 @@ const PostPage = ({ data, location }) => {
   )
 }
 
-export default PostPage
+export default BlogPostTemplate
 
 export const pageQuery = graphql`
   query BlogPostBySlug(
@@ -73,28 +73,29 @@ export const pageQuery = graphql`
         title
       }
     }
-      markdownRemark(id: { eq: $id }) {
-          id
-          excerpt(pruneLength: 160)
-          html
-          frontmatter {
-              title
-              date(formatString: "MMMM DD, YYYY")
-              description
-          }fields {
-              category
-              tags
-          }
+    markdownRemark(id: { eq: $id }) {
+      id
+      excerpt(pruneLength: 160)
+      html
+      frontmatter {
+        title
+        date(formatString: "MMMM DD, YYYY")
+        description
       }
-      previous: markdownRemark(id: { eq: $previousPostId }) {
-          fields {
-              slug
-          }
-          frontmatter {
-              title
-          }
+      fields {
+        category
+        tags
       }
-      next: markdownRemark(id: { eq: $nextPostId }) {
+    }
+    previous: markdownRemark(id: { eq: $previousPostId }) {
+      fields {
+        slug
+      }
+      frontmatter {
+        title
+      }
+    }
+    next: markdownRemark(id: { eq: $nextPostId }) {
       fields {
         slug
       }
