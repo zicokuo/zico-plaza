@@ -70,3 +70,4 @@ yarn-error.log
 .history/
 .vscode/
 __generated__
+yarn.lock
