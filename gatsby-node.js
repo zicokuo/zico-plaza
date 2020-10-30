@@ -3,7 +3,7 @@ const {
     createFilePath
 } = require(`gatsby-source-filesystem`)
 
-//  瀵煎嚭鑷畾涔墂ebpack鍒悕
+//  导出自定义webpack别名
 exports.onCreateWebpackConfig = ({
     stage,
     actions

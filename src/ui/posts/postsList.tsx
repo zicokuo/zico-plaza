@@ -33,9 +33,9 @@ const UIPostsListWithCard = (item: CardItemProps) => {
           component="img"
           image={item?.thumbUrl}
           title={item.title}
-        />
+        ></CardMediaSize>
         <CardContent>
-          <Typography gutterBottom variant="title" component="p">
+          <Typography gutterBottom variant="h6" component="p">
             {item.title.length > 64 ? item.title.substring(0, 60) + "..." : ""}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">

@@ -1,14 +1,14 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import { Link, FormattedMessage, useIntl } from "gatsby-plugin-intl"
 import Layout from "../layouts/layout"
 import SEO from "../components/seo"
 import { Chip } from "@material-ui/core"
-import tw, { styled } from "twin.macro"
-import UIPostsListWithCard from "../ui/posts/postsList"
 
-const BlogIndexPage = ({ data, location }) => {
+const BlogIndexPage = ({ location }) => {
+  console.log(location)
   let intl = useIntl()
+  let data = useStaticQuery(pageQuery);
   let siteTitle = intl.formatMessage({
     id: data.site.siteMetadata?.title || `Title`,
   })
