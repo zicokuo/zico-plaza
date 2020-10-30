@@ -46,6 +46,7 @@
         "gatsby-transformer-sharp": "^2.5.17",
         "graphql-tag": "^2.11.0",
         "isomorphic-fetch": "^3.0.0",
+        "materialui-daterange-picker": "^1.1.92",
         "monad-ui": "^1.2.0",
         "node-sass": "^4.14.1",
         "postcss": "^8.1.4",
