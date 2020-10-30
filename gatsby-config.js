@@ -38,17 +38,17 @@ module.exports = {
                 routeFilePath: `src/routes.ts`
             }
         },
-        {
-            resolve: `gatsby-plugin-apollo-shopify`,
-            options: {
-                shopName: `hhhtest001`,
-                accessToken: `cea03dbd64effd74062401daeb0312fa`,
-                // Optionally set the API version you want to use. For a list of available API versions,
-                // see: https://shopify.dev/concepts/about-apis/versioning/release-notes
-                // Defaults to unspecified/oldest stable
-                apiVersion: "2020-10",
-            },
-        },
+        // {
+        //     resolve: `gatsby-plugin-apollo-shopify`,
+        //     options: {
+        //         shopName: `hhhtest001`,
+        //         accessToken: `cea03dbd64effd74062401daeb0312fa`,
+        //         // Optionally set the API version you want to use. For a list of available API versions,
+        //         // see: https://shopify.dev/concepts/about-apis/versioning/release-notes
+        //         // Defaults to unspecified/oldest stable
+        //         apiVersion: "2020-10",
+        //     },
+        // },
         {
             resolve: `gatsby-source-shopify`,
             options: {

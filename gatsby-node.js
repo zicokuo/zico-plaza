@@ -3,6 +3,23 @@ const {
     createFilePath
 } = require(`gatsby-source-filesystem`)
 
+//  导出自定义webpack别名
+exports.onCreateWebpackConfig = ({
+    stage,
+    actions
+}) => {
+    actions.setWebpackConfig({
+        resolve: {
+            alias: {
+                "@/src": path.resolve(__dirname, './src'),
+                "@/public": path.resolve(__dirname, './public'),
+                "@/content": path.resolve(__dirname, './content'),
+                "@/intl": path.resolve(__dirname, './intl'),
+            }
+        }
+    })
+};
+
 exports.createPages = async({
     graphql,
     actions,

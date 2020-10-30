@@ -21,7 +21,7 @@ export interface CardItemProps {
   styledWrapper?: any
 }
 const UIPostsListWithCard = (item: CardItemProps) => {
-  let CardMediaSize = styled.style`
+  let CardMediaSize = styled.div`
     max-height: 50%;
   `
 
