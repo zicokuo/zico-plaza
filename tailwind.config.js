@@ -1,6 +1,7 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
     plugins: [],
+    important: true,
     purge: {
         mode: "all",
         content: ["./src/**/*.js", "./src/**/*.jsx", "./src/**/*.ts", "./src/**/*.tsx"],
@@ -9,7 +10,17 @@ module.exports = {
         },
     },
     theme: {
-        extend: {
+        screens: {
+            'mobile': {
+                raw: '(orientation: portrait)',
+                max: '639px',
+            },
+            sm: '640px',
+            md: '768px',
+            lg: '1024px',
+            xl: '1280px',
+        },
+        expend: {
             colors: {
                 "gold-100": "#fbab83",
                 "gold-500": "#FA884F",

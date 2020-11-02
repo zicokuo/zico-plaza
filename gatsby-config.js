@@ -9,7 +9,18 @@ module.exports = {
         siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
         social: {
             twitter: ``
-        }
+        },
+        siteNav: [{
+                path: 'category',
+                label: 'Category',
+                type: 'category'
+            },
+            {
+                path: 'shop',
+                label: 'Shop',
+                type: 'shop'
+            },
+        ]
     },
     plugins: [
         //  PostCSS 处理

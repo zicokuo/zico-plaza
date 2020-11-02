@@ -2,8 +2,6 @@ const path = require(`path`)
 const {
     createFilePath
 } = require(`gatsby-source-filesystem`)
-
-//  导出自定义webpack别名
 exports.onCreateWebpackConfig = ({
     stage,
     actions
@@ -160,7 +158,8 @@ exports.createSchemaCustomization = ({
     // Also explicitly define the Markdown frontmatter
     // This way the "MarkdownRemark" queries will return `null` even when no
     // blog posts are stored inside "content/blog" instead of returning an error
-    createTypes(`
+    createTypes(
+        `
     type SiteSiteMetadata {
       author: Author
       siteUrl: String
