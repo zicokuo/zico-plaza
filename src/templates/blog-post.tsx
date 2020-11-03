@@ -23,6 +23,7 @@ const BlogPostTemplate = ({ data, location }) => {
       >
         <header>
           <h1 itemProp="headline">{post.frontmatter.title}</h1>
+          <small itemProp="headline">{post.frontmatter.description}</small>
           <p>{post.frontmatter.date}</p>
         </header>
         <section

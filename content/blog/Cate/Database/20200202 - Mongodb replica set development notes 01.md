@@ -1,24 +1,27 @@
 ---
-title: mongoDb 分片副本集 开发纪要
-metaTitle: mongoDb Shard Replica Set Development Summary
-category: DataBase
+title: MongoDb 副本集开发笔记01
+enTitle: Mongodb replica set development notes 01
+createAt: 2020-02-02 09:11
+author: Zico
+category: Mongodb
+visitable: 1
+description: MongoDB集群开发记录,有助于躲坑
+enDescription: MongoDB cluster development record, helpful to avoid pits
 tags:
  - MongoDB
-createAt: 2020-02-02 09:11
-visitable: 1
 ---
 
 > 分片副本集 开发纪要
 
 ## 集群
 
-### 分片寻址离散问题
+### 1. 分片寻址离散问题
 
 1. 利用 MongoDB 分片均衡分布机制,使用\_id 作为均片键,可以增加不同范围集合查询和计算效率;
 
 2. 同样利用均衡分布机制,采用时序升序权重较大的索引字段作为片键,可以使频繁查询相同集合进行倾斜存放,让单机性能查找性能提升,优化分片后寻址效率;
 
-### MongoDB 事务提交
+### 2. MongoDB 事务提交
 
 Nodejs 中使用批量异步提交 MongoDB 操作，首先得开启 session,操作中传递 session 进去,最后 commit session，如果按 500 个数据记录就需要分片事务提交，那么就得预先储存多个 session，并且通过异步并发运行触发方法进行提交。
 
@@ -28,7 +31,7 @@ Nodejs 中使用批量异步提交 MongoDB 操作，首先得开启 session,操�
 
 ## 查询
 
-### 1. MongoDB Join 表
+### 3. MongoDB Join 表
 
 MongoDB Join 表是通过 aggregate 中\$lookup 方法进行 join 操作，join 后的记录集合会写入到 as 配置的字段中，此时数据集中存在嵌套文档的字段,实体相当于 leftJoin 的一棵树；
 
@@ -38,11 +41,7 @@ MongoDB Join 表是通过 aggregate 中\$lookup 方法进行 join 操作，join 
 
 ## 分片
 
-::: tip
-
-MongoDb 分片前需要采用 sh.addShare 添加分片库
-
-:::
+> MongoDb 分片前需要采用 sh.addShare 添加分片库
 
 `集合分片`
 
@@ -52,17 +51,13 @@ MongoDb 分片前需要采用 sh.addShare 添加分片库
 
 采用默认片键的情况下(\_id),均匀分布的算法是根据\_id 的哈希值进行分簇(chunk),将不同的簇平铺到分片上;
 
-::: tip warning
-
 均衡后,实际上数据是以一定量的小集合形式分散在各个分片上,当寻找数据的时候,命中多个分片,即等效并发查库;
 
 若查询区域没有超出簇的寻址范围,实际上有效的查询只在命中范围的分片上,其他分片则会发生空转情况(即使没有数据,也要进行查库,并且获得结果);
 
-:::
-
 ## 注意和限制
 
-### 1. Join 表查询
+### 4. Join 表查询
 
 MongoDB 3.6 版本开始,官网已注明`$lookup的from表不允许是分片表`;
 
@@ -70,11 +65,11 @@ MongoDB 3.6 版本开始,官网已注明`$lookup的from表不允许是分片表`
 
 所以被 Join 的表不能是分片表;
 
-### 2. MapReduce
+### 5. MapReduce
 
 MongoDB 从 4.2 版本开始,也对 MapReduce 进行了限制,分片表不再支持 MapReduce,并计划在未来的版本中进行废弃,暂时估计是由于集群之后,MapReduce 需要在 MergeSet 之后才能进行,因此在 MapReduce 之前就需要把结果集合全部找出来,然后再迭代,这样无论性能\内存和效率都大打折扣;
 
-### 3. 游标
+### 6. 游标
 
 游标迭代查询对于优化大量数据的查找很有帮助,特别是针对 MongoDB 分片集群;
 
@@ -84,7 +79,7 @@ MongoDB 根据结果集合的索引(假设是\_id)去先找出最小集合片(10
 
 使用游标(cursor)的好处是方便对大数量的分片集合进行检索,减少一次性返回大量结果而造成资源和带宽的性能瓶颈;
 
-### 4. foreach + 游标
+### 7. foreach + 游标
 
 MongoDB 分片表的迭代查询,可以利用`foreach` + `cursor` 来实现遍历,由于 MongoDB 游标默认有超时设置,需要在使用游标的时候,设置游标不过期(noCursorTimeout)
 
@@ -95,7 +90,3 @@ MongoDB 的 BSON 数据结构,让其能够支持文档嵌套(doc-subDoc);
 子文档可以灵活的储存一些关联数据,用于关联查询的效率要比拆分为 2 个表要好;
 
 子文档的操作可以说是寄生于父级文档;
-
-`查询`
-
-

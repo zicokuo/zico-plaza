@@ -1,9 +1,14 @@
 ---
-title: "Koa框架项目协同开发文档"
-date: "2019-12-05"
-author: "Zico"
-description: "一套用于快速开发Koa框架的协同开发规范"
+title: Koa框架项目协同开发文档
+enTitle: Koa General Framework Docs
+createAt: 2019-12-05
+author: Zico
+category: Koa
 visitable: 1
+description: 一套用于快速开发Koa框架的协同开发规范
+enDescription: A set of collaborative development specifications for rapid development of Koa framework
+tags: 
+ - NodeJs
 ---
 
 ## 快速使用
