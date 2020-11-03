@@ -16,6 +16,11 @@ module.exports = {
                 type: 'category'
             },
             {
+                path: 'tags',
+                label: 'Tags',
+                type: 'tag'
+            },
+            {
                 path: 'shop',
                 label: 'Shop',
                 type: 'shop'

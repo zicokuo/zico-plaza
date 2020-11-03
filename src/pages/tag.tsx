@@ -1,12 +1,14 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 
 import Layout from "../layouts/layout"
 import SEO from "../components/seo"
 import PostsList from "../components/postsList"
 
-const TagTemplate = ({ location, pageContext, data }) => {
-  const { tag } = pageContext ?? []
+const TagTemplate = ({ location, data }) => {
+  const { tag } = useStaticQuery(pageQuery)
+  console.log(tag)
+
   return (
     <Layout location={location} title={`Posts in tag "${tag}"`}>
       <div className="tag-container">
@@ -21,28 +23,28 @@ const TagTemplate = ({ location, pageContext, data }) => {
 }
 
 export const pageQuery = graphql`
-    query TagPage($tag: String) {
-        allMarkdownRemark(
-            limit: 1000
-            filter: { fields: { tags: { in: [$tag] } } }
-        ) {
-            totalCount
-            edges {
-                node {
-                    fields {
-                        slug
-                        tags
-                    }
-                    excerpt
-                    timeToRead
-                    frontmatter {
-                        title
-                        date
-                    }
-                }
-            }
+  query {
+    allMarkdownRemark {
+      group(field: fields___tags, limit: 1000) {
+        fieldValue
+        totalCount
+      }
+      edges {
+        node {
+          fields {
+            slug
+            tags
+          }
+          excerpt
+          timeToRead
+          frontmatter {
+            title
+            date
+          }
         }
+      }
     }
+  }
 `
 
 export default TagTemplate

@@ -10,8 +10,7 @@ import {
   Theme,
   Toolbar,
 } from "@material-ui/core"
-import { graphql, useStaticQuery } from "gatsby"
-import { Link } from "gatsby-plugin-intl"
+import { graphql, useStaticQuery, Link } from "gatsby"
 import React, { useState } from "react"
 import MenuIcon from "@material-ui/icons/Menu"
 import { Div, MobileOnly, PcOnly } from "./commonStyledComponents"

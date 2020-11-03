@@ -7,4 +7,8 @@ module.exports = {
   //   path: `/shop`,
   //   component:`src/pages/shop.tsx`
   // }
+  tags: {
+    path: `/tags`,
+    component:`src/pages/tag.tsx`
+  }
 }
