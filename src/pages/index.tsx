@@ -5,6 +5,7 @@ import Layout from "../layouts/layout"
 import SEO from "../components/seo"
 import { Chip, List, ListItem } from "@material-ui/core"
 import CheckCircleIcon from "@material-ui/icons/CheckCircle"
+import tw from "twin.macro"
 
 const BlogIndexPage = ({ location }) => {
   console.log(location)
@@ -52,9 +53,9 @@ const BlogIndexPage = ({ location }) => {
                         <span itemProp="headline">{title}</span>
                       </Link>
                       {post.frontmatter.visitable !== 0 ? (
-                        <div css={[tw`text-green-400`]}>
-                          <CheckCircleIcon color="primary" />
-                        </div>
+                        <span css={[tw`p-2 text-green-400`]}>
+                          <CheckCircleIcon color="inherit" />
+                        </span>
                       ) : null}
                     </h2>
                     {post.frontmatter.tags?.map(pt => (

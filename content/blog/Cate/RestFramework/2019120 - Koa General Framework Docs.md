@@ -1,16 +1,15 @@
 ---
-title: Koa General Framework Docs
+title: "Koa框架项目协同开发文档"
 date: "2019-12-05"
-description: "Hello World"
+author: "Zico"
+description: "一套用于快速开发Koa框架的协同开发规范"
 visitable: 1
 ---
-
-`ver 0.1` by `zico` at 2019-12-05
 
 ## 快速使用
 
 * 开发部署
-  
+
     安装package.json依赖配置
 
 ```cmd
@@ -37,20 +36,27 @@ npm install
     命名内容采用语义化单词,并尽量体现使用的语义;
     命名中尽量不采用复数形式命名,简化语义判断;
 
+* 小驼峰
+
 ```javascript
-> 小驼峰
 testModel.js    √
 TestModel.js    ×
 test_model.js   ×
+```
 
-> 语义化
+* 语义化
+
+```javascript
 rowToList.js    √
 row2List.js     √
 r2l.js          ×
 getListingSummaryByBatch()      √
 getList()                       ×
+```
 
-> 推荐单数
+* 推荐单数
+
+```javascript
 /model/userModel.js             √
 /models/usersModel.js           ×
 ```
@@ -102,7 +108,7 @@ let a = async function(){           不允许
 
     文件结构是遵循最小可运行原则设计,开发文件夹是 src / apps ,根据对应的应用模块进行开发,声明路由后,在Koa实例化后,采用routers方法,配置对应的apps名字即可
 
-```
+```yml
 - src
     - core
         - service                               # 服务
@@ -140,5 +146,3 @@ let a = async function(){           不允许
     - logs                                      # 日志文件夹
     - test                                      # 测试文件夹
 ```
-
-[Rest Framework](RestFramework_koa.md)
