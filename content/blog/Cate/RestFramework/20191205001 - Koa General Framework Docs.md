@@ -2,9 +2,8 @@
 title: Koa General Framework Docs
 date: "2019-12-05"
 description: "Hello World"
+visitable: 1
 ---
-
-# Koa General Framework Docs
 
 `ver 0.1` by `zico` at 2019-12-05
 

@@ -5,9 +5,9 @@ import "typeface-merriweather"
 import "./src/normalize.css"
 // custom CSS styles
 import "./src/style.css"
-
+import "./static/maize.css"
 // Highlighting for code blocks
-import "prismjs/themes/prism.css"
+// import "prismjs/themes/prism.css"
 
 import InjectProvider from '@/src/lib/inject-provider'
 const preferDefault = m => (m && m.default) || m

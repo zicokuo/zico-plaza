@@ -1,5 +1,8 @@
 /* CSS Custom Properties Definitions */
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root {
     --maxWidth-none: "none";
     --maxWidth-xs: 20rem;
@@ -334,7 +337,3 @@ a:focus {
         list-style-position: inside;
     }
 }
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

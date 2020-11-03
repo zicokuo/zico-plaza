@@ -22,17 +22,27 @@ module.exports = {
             },
         ]
     },
+    onCreateBabelConfig: ({
+        actions: {
+            setBabelPlugin
+        }
+    }) => {
+        setBabelPlugin({
+            name: 'babel-plugin-tailwind-components'
+        })
+    },
     plugins: [
+
         //  PostCSS 处理
         {
             resolve: `gatsby-plugin-postcss`
         },
         //  Tailwind css
         {
-            resolve: `gatsby-plugin-tailwindcss`
-        },
-        {
-            resolve: `gatsby-plugin-react-helmet`
+            resolve: `gatsby-plugin-tailwindcss`,
+            options: {
+
+            }
         },
         //  Material UI
         {

@@ -1,23 +1,45 @@
-import { IconButton, Menu, MenuItem, Toolbar } from "@material-ui/core"
+import {
+  createStyles,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  makeStyles,
+  Menu,
+  MenuItem,
+  Theme,
+  Toolbar,
+} from "@material-ui/core"
 import { graphql, useStaticQuery } from "gatsby"
 import { Link } from "gatsby-plugin-intl"
 import React, { useState } from "react"
-import tw, { styled } from "twin.macro"
 import MenuIcon from "@material-ui/icons/Menu"
 import { Div, MobileOnly, PcOnly } from "./commonStyledComponents"
+import tw, { styled } from "twin.macro"
+
+const drawerWidth = 75
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    drawer: {
+      width: drawerWidth + "vw",
+    },
+  })
+)
 
 const SiteNavWidget = ({}) => {
   const { site } = useStaticQuery(pageQuery),
+    classes = useStyles(),
     siteNav = site?.siteMetadata?.siteNav ?? [],
-    siteNavId = "header-site-nav",
     HeaderNavItem = styled.div`
       ${tw`p-2`}
     `,
     HeaderNav = PcOnly,
     MobileHeaderNav = MobileOnly,
-    [mobileHeaderEL, setMobileHeaderEl] = useState<null | HTMLElement>(null),
+    [drawerOpen, setDrawerOpen] = useState(false),
     handleClickMobileMenuPopUp = (event: React.MouseEvent<HTMLElement>) => {
-      setMobileHeaderEl(event.currentTarget)
+      setDrawerOpen(true)
+      // setMobileHeaderEl(event.currentTarget)
     }
 
   return (
@@ -37,27 +59,26 @@ const SiteNavWidget = ({}) => {
       {/* 移动导航 */}
       <MobileHeaderNav>
         <IconButton edge="end" onClick={handleClickMobileMenuPopUp}>
-          <Div as={MenuIcon} tw={`text-red-500`}></Div>
+          <Div as={MenuIcon} color="inherit"></Div>
         </IconButton>
-        <Menu
-          anchorEl={mobileHeaderEL}
-          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-          id={siteNavId}
-          keepMounted
-          transformOrigin={{ vertical: "bottom", horizontal: "right" }}
-          open={Boolean(mobileHeaderEL)}
-          onClose={() => setMobileHeaderEl(null)}
+        <Drawer
+          classes={{ paper: classes.drawer }}
+          anchor={"left"}
+          open={drawerOpen}
+          onClose={_ => setDrawerOpen(false)}
         >
-          {siteNav.map((nav: { path: string; label: React.ReactNode }) => {
-            return (
-              <MenuItem>
-                <Link to={nav?.path?.match("^/") ? nav : `/${nav.path}`}>
-                  {nav?.label}
-                </Link>
-              </MenuItem>
-            )
-          })}
-        </Menu>
+          <List>
+            {siteNav.map((nav: { path: string; label: React.ReactNode }) => {
+              return (
+                <ListItem>
+                  <Link to={nav?.path?.match("^/") ? nav : `/${nav.path}`}>
+                    {nav?.label}
+                  </Link>
+                </ListItem>
+              )
+            })}
+          </List>
+        </Drawer>
       </MobileHeaderNav>
     </nav>
   )

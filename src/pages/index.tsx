@@ -3,12 +3,13 @@ import { graphql, useStaticQuery } from "gatsby"
 import { Link, FormattedMessage, useIntl } from "gatsby-plugin-intl"
 import Layout from "../layouts/layout"
 import SEO from "../components/seo"
-import { Chip } from "@material-ui/core"
+import { Chip, List, ListItem } from "@material-ui/core"
+import CheckCircleIcon from "@material-ui/icons/CheckCircle"
 
 const BlogIndexPage = ({ location }) => {
   console.log(location)
   let intl = useIntl()
-  let data = useStaticQuery(pageQuery);
+  let data = useStaticQuery(pageQuery)
   let siteTitle = intl.formatMessage({
     id: data.site.siteMetadata?.title || `Title`,
   })
@@ -32,41 +33,48 @@ const BlogIndexPage = ({ location }) => {
     <Layout location={location} title={siteTitle}>
       <SEO title={intl.formatMessage({ id: `title` })} />
       <FormattedMessage id="welcome" />
-      <ol style={{ listStyle: `none` }}>
-        {posts.map(post => {
-          let title = post.frontmatter.title || post.fields.slug
+      <List style={{ listStyle: `none` }}>
+        {posts
+          .filter(post => post.frontmatter?.visitable !== 0)
+          .map(post => {
+            let title = post.frontmatter.title || post.fields.slug
 
-          return (
-            <li key={post.fields.slug}>
-              <article
-                className="post-list-item"
-                itemScope
-                itemType="http://schema.org/Article"
-              >
-                <header>
-                  <h2>
-                    <Link to={post.fields.slug} itemProp="url">
-                      <span itemProp="headline">{title}</span>
-                    </Link>
-                  </h2>
-                  {post.frontmatter.tags?.map(pt => (
-                    <Chip label={pt}></Chip>
-                  ))}
-                  <small>{post.frontmatter.date}</small>
-                </header>
-                <section>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: post.frontmatter.description || post.excerpt,
-                    }}
-                    itemProp="description"
-                  />
-                </section>
-              </article>
-            </li>
-          )
-        })}
-      </ol>
+            return (
+              <ListItem key={post.fields.slug}>
+                <article
+                  className="post-list-item"
+                  itemScope
+                  itemType="http://schema.org/Article"
+                >
+                  <header>
+                    <h2>
+                      <Link to={post.fields.slug} itemProp="url">
+                        <span itemProp="headline">{title}</span>
+                      </Link>
+                      {post.frontmatter.visitable !== 0 ? (
+                        <div css={[tw`text-green-400`]}>
+                          <CheckCircleIcon color="primary" />
+                        </div>
+                      ) : null}
+                    </h2>
+                    {post.frontmatter.tags?.map(pt => (
+                      <Chip label={pt}></Chip>
+                    ))}
+                    <small>{post.frontmatter.date}</small>
+                  </header>
+                  <section>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: post.frontmatter.description || post.excerpt,
+                      }}
+                      itemProp="description"
+                    />
+                  </section>
+                </article>
+              </ListItem>
+            )
+          })}
+      </List>
     </Layout>
   )
 }
@@ -89,6 +97,7 @@ export const pageQuery = graphql`
         frontmatter {
           date(formatString: "MMMM DD, YYYY")
           title
+          visitable
           description
           category
           tags
