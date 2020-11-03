@@ -73,7 +73,7 @@
     },
     "babelMacros": {
         "twin": {
-            "config": "tailwind.config.js",
+            "config": "tailwind.js",
             "preset": "styled-components",
             "autoCssProp": true,
             "debugProp": true,
