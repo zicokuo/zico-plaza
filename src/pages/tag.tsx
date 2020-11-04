@@ -6,15 +6,15 @@ import SEO from "../components/seo"
 import PostsList from "../components/postsList"
 
 const TagTemplate = ({ location, data }) => {
-  const { tag } = useStaticQuery(pageQuery)
-  console.log(tag)
+  const { allMarkdownRemark } = useStaticQuery(pageQuery)
+  console.log(allMarkdownRemark)
 
   return (
-    <Layout location={location} title={`Posts in tag "${tag}"`}>
+    <Layout location={location} title={`Posts in tag "${allMarkdownRemark}"`}>
       <div className="tag-container">
-        <SEO title={`Posts in tag "${tag}"`} />
+        <SEO title={`Posts in tag "${allMarkdownRemark}"`} />
         <div>
-          <h1>Tag: {tag}</h1>
+          <h1>Tag: {allMarkdownRemark}</h1>
           <PostsList postEdges={data.allMarkdownRemark.edges} />
         </div>
       </div>
