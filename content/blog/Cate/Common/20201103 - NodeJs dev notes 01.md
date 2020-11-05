@@ -9,6 +9,8 @@ description: 为了快速开展 NodeJs 工作而做的记录
 enDescription: Records made in order to quickly start the work of NodeJs
 tags:
  - NodeJs
+slug: mongodb
+
 ---
 ## Yarn
 
