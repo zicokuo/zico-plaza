@@ -5,7 +5,7 @@ import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import { useAllTags } from "../hooks/tags-hooks"
 import Layout from "../layouts/layout"
-import { Link, FormattedMessage, useIntl } from "gatsby-plugin-intl"
+import { Link, useIntl } from "gatsby-plugin-intl"
 import SEO from "../components/seo"
 
 const Tags = ({ location, pageContext, data }) => {
@@ -30,7 +30,7 @@ const Tags = ({ location, pageContext, data }) => {
           {group.map(({ fieldValue }) => {
             return (
               <li key={fieldValue}>
-                <Link to={fieldValue}>{fieldValue}</Link>
+                <Link to={`/tags/${fieldValue}`}>{fieldValue}</Link>
               </li>
             )
           })}
