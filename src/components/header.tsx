@@ -13,11 +13,13 @@ import {
 import SiteNavWidget from "./siteNav"
 import { MobileOnly, PcOnly } from "./commonStyledComponents"
 import ShareIcon from "@material-ui/icons/Share"
+import { graphql, useStaticQuery } from "gatsby"
 interface Props {
   /**
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
    */
+  title?: String
   window?: () => Window
   children: React.ReactElement
 }
@@ -39,17 +41,20 @@ const ElevationScrollWrapper = (props: Props) => {
 }
 
 const HeaderWidget = ({ isRootPath = true, title = null }, props: Props) => {
+  const { site } = useStaticQuery(pageQuery),
+    pageTitle = site?.siteMetadata?.title || props?.title || ""
+
   let HeaderLogo
   if (isRootPath) {
     HeaderLogo = () => (
       <Link to="/">
-        <FormattedMessage id={`${title}`} />
+        <FormattedMessage id={`${pageTitle || title}`} />
       </Link>
     )
   } else {
     HeaderLogo = () => (
       <Link className="header-link-home" to="/">
-        <FormattedMessage id={`${title}`} />
+        <FormattedMessage id={`${pageTitle || title}`} />
       </Link>
     )
   }
@@ -84,3 +89,24 @@ const HeaderWidget = ({ isRootPath = true, title = null }, props: Props) => {
 }
 
 export default HeaderWidget
+
+export const pageQuery = graphql`
+  query headerQuery {
+    site(siteMetadata: {}) {
+      siteMetadata {
+        title
+        description
+        siteNav {
+          path
+          label
+          type
+        }
+      }
+    }
+    intl: sitePlugin(name: { eq: "gatsby-plugin-intl" }) {
+      options: pluginOptions {
+        lang: languages
+      }
+    }
+  }
+`

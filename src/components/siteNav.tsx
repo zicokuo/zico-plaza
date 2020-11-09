@@ -10,11 +10,12 @@ import {
   Theme,
   Toolbar,
 } from "@material-ui/core"
-import { graphql, useStaticQuery, Link } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import React, { useState } from "react"
 import MenuIcon from "@material-ui/icons/Menu"
 import { Div, MobileOnly, PcOnly } from "./commonStyledComponents"
 import tw, { styled } from "twin.macro"
+import { Link } from "gatsby-plugin-intl"
 
 const drawerWidth = 75
 
@@ -70,7 +71,11 @@ const SiteNavWidget = ({}) => {
             {siteNav.map((nav: { path: string; label: React.ReactNode }) => {
               return (
                 <ListItem>
-                  <Link to={nav?.path?.match("^/") ? nav : `/${nav.path}`}>
+                  <Link
+                    to={
+                      nav?.path?.match("^/") ? nav : (`/${nav.path}` as String)
+                    }
+                  >
                     {nav?.label}
                   </Link>
                 </ListItem>
