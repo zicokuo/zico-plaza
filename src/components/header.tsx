@@ -14,6 +14,9 @@ import SiteNavWidget from "./siteNav"
 import { MobileOnly, PcOnly } from "./commonStyledComponents"
 import ShareIcon from "@material-ui/icons/Share"
 import { graphql, useStaticQuery } from "gatsby"
+import LangSwitchWidget from "./langSwitch"
+import { createStyles, makeStyles } from "@material-ui/styles"
+
 interface Props {
   /**
    * Injected by the documentation to work in an iframe.
@@ -59,13 +62,30 @@ const HeaderWidget = ({ isRootPath = true, title = null }, props: Props) => {
     )
   }
 
+  const classes = makeStyles(theme =>
+    createStyles({
+      root: {
+        position: "relative",
+        maxWidth: "1200px",
+        margin: "auto",
+      },
+      langSwitch: {
+        position: "relative",
+        right: "1em",
+      },
+    })
+  )
+
   return (
     <ElevationScrollWrapper {...props}>
       <AppBar position={"sticky"}>
         <PcOnly>
-          <Toolbar>
+          <Toolbar classes={classes()} disableGutters={true}>
             <HeaderLogo></HeaderLogo>
             <SiteNavWidget></SiteNavWidget>
+            <div css={[tw`absolute right-0 ml-4`]}>
+              <LangSwitchWidget></LangSwitchWidget>
+            </div>
           </Toolbar>
         </PcOnly>
         <MobileOnly>

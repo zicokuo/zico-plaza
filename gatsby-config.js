@@ -168,7 +168,7 @@ module.exports = {
             resolve: `gatsby-plugin-styled-components`,
             options: {
                 "pure": true
-                    // Add any options here
+                // Add any options here
             }
         }, {
             resolve: "gatsby-plugin-categories",
@@ -181,8 +181,7 @@ module.exports = {
             options: {
                 templatePath: `${__dirname}/src/pages/tag.tsx`
             }
-        },
-
+        }
 
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.dev/offline
