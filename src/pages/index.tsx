@@ -69,7 +69,8 @@ const BlogIndexPage = ({ location }: { location: Location }) => {
             return (
               <Grid
                 key={frontmatter.id}
-                xs={key == 0 ? 12 : 6}
+                md={key == 0 ? 12 : 6}
+                xs={12}
                 style={{ height: "auto", paddingBottom: "1em" }}
               >
                 <Card className={classes.postCard}>

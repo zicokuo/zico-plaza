@@ -147,13 +147,14 @@ exports.onCreateNode = ({
 
     //  封面
     const {
-      title
+      title,
+      enTitle
     } = node.frontmatter;
     const thumbBgColor = [
       '#B0E0E6', '#4169E1', '#FF6347'
     ];
     const generatedCoverSlug = createImage({
-      title,
+      title: enTitle,
       border: false,
       domain: 'zico.plaza',
       imgPath: './src/thumbs',
