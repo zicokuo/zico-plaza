@@ -68,6 +68,7 @@ const BlogIndexPage = ({ location }: { location: Location }) => {
               require(`../${lodash.replace(fields.generatedCoverSlug, "", "")}`)
             return (
               <Grid
+                item
                 key={frontmatter.id}
                 md={key == 0 ? 12 : 6}
                 xs={12}

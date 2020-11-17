@@ -13,5 +13,9 @@
     "notfound": {
         "header": "NOT FOUND",
         "description": "You just hit a route that doesn't exist... the sadness."
-    }
+    },
+    "Zico Plaza":"Zico乐园",
+    "cn":"中文",
+    "Author":"作者"
+
 }
