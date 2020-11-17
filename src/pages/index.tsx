@@ -64,8 +64,7 @@ const BlogIndexPage = ({ location }: { location: Location }) => {
           .filter(post => post.frontmatter?.visitable !== 0)
           .map(function ({ frontmatter, fields }, key) {
             let thumb =
-              frontmatter.img ??
-              require(`../${lodash.replace(fields.generatedCoverSlug, "", "")}`)
+              frontmatter.img ?? require(`../${fields.generatedCoverSlug}`)
             return (
               <Grid
                 item
