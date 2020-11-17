@@ -1,10 +1,10 @@
 const fs = require(`fs`);
 const path = require(`path`)
 const lodash = require(`lodash`)
+const createImage = require(`gatsby-plugin-blog-cover`)
 const {
   createFilePath
 } = require(`gatsby-source-filesystem`)
-const createImage = require(`gatsby-plugin-blog-cover`)
 exports.onCreateWebpackConfig = ({
   stage,
   actions
@@ -168,6 +168,7 @@ exports.onCreateNode = ({
       name: 'generatedCoverSlug',
       value: generatedCoverSlug
     })
+
   }
 }
 
