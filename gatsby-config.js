@@ -150,7 +150,7 @@ module.exports = {
                 // language file path
                 defaultLanguage: `cn`,
                 // option to redirect to `/ko` when connecting `/`
-                redirect: true
+                redirect: false
             },
         },
         {
@@ -168,21 +168,35 @@ module.exports = {
             resolve: `gatsby-plugin-styled-components`,
             options: {
                 "pure": true
-                    // Add any options here
+                // Add any options here
             }
         }, {
+            //    markdown 分类库
             resolve: "gatsby-plugin-categories",
             options: {
                 templatePath: `${__dirname}/src/pages/category.tsx`
             }
-        },
-        {
+        }, {
+            //    markdown 标签库
             resolve: "gatsby-plugin-tags",
             options: {
                 templatePath: `${__dirname}/src/pages/tag.tsx`
             }
-        },
-
+        }, {
+            //    markdown 文章预览图
+            resolve: `gatsby-transformer-remark`,
+            options: {
+                plugins: [{
+                    resolve: `gatsby-remark-responsive-image`,
+                    options: {
+                        // It's important to specify the maxWidth (in pixels) of
+                        // the content container as this plugin uses this as the
+                        // base for generating different widths of each image.
+                        maxWidth: 590,
+                    },
+                }, ]
+            }
+        }
 
         // this (optional) plugin enables Progressive Web App + Offline functionality
         // To learn more, visit: https://gatsby.dev/offline

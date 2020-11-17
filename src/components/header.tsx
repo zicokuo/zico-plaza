@@ -14,6 +14,9 @@ import SiteNavWidget from "./siteNav"
 import { MobileOnly, PcOnly } from "./commonStyledComponents"
 import ShareIcon from "@material-ui/icons/Share"
 import { graphql, useStaticQuery } from "gatsby"
+import LangSwitchWidget from "./langSwitch"
+import { createStyles, makeStyles } from "@material-ui/styles"
+
 interface Props {
   /**
    * Injected by the documentation to work in an iframe.
@@ -44,34 +47,43 @@ const HeaderWidget = ({ isRootPath = true, title = null }, props: Props) => {
   const { site } = useStaticQuery(pageQuery),
     pageTitle = site?.siteMetadata?.title || props?.title || ""
 
-  let HeaderLogo
-  if (isRootPath) {
-    HeaderLogo = () => (
-      <Link to="/">
-        <FormattedMessage id={`${pageTitle || title}`} />
-      </Link>
-    )
-  } else {
-    HeaderLogo = () => (
-      <Link className="header-link-home" to="/">
-        <FormattedMessage id={`${pageTitle || title}`} />
-      </Link>
-    )
-  }
+  let HeaderLogo = () => (
+    <Link className="header-link-home" to="/">
+      <FormattedMessage id={`${pageTitle || title}`} />
+    </Link>
+  )
+
+  const classes = makeStyles(theme =>
+    createStyles({
+      root: {
+        position: "relative",
+        maxWidth: "1200px",
+        margin: "auto",
+        justifyContent: "center",
+      },
+      langSwitch: {
+        position: "relative",
+        right: "1em",
+      },
+    })
+  )
 
   return (
     <ElevationScrollWrapper {...props}>
       <AppBar position={"sticky"}>
         <PcOnly>
-          <Toolbar>
+          <Toolbar classes={classes()} disableGutters={true}>
             <HeaderLogo></HeaderLogo>
-            <SiteNavWidget></SiteNavWidget>
+            {/* <SiteNavWidget></SiteNavWidget> */}
+            <div css={[tw`absolute right-0 ml-4`]}>
+              {/* <LangSwitchWidget></LangSwitchWidget> */}
+            </div>
           </Toolbar>
         </PcOnly>
         <MobileOnly>
           <div css={[tw`flex items-center justify-between`]}>
             <div css={[tw`flex-1 p-2 text-white`]}>
-              <SiteNavWidget></SiteNavWidget>
+              {/* <SiteNavWidget></SiteNavWidget> */}
             </div>
             <Typography variant="h6" css={[tw`flex-1 text-center text-white `]}>
               <HeaderLogo></HeaderLogo>

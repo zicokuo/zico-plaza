@@ -7,30 +7,40 @@ import { useAllTags } from "../hooks/tags-hooks"
 import Layout from "../layouts/layout"
 import { Link, useIntl } from "gatsby-plugin-intl"
 import SEO from "../components/seo"
+import { getQuery } from "clearlake"
 
 const Tags = ({ location, pageContext, data }) => {
-  const intl = useIntl()
-  const { group } = useAllTags()
-  const { tag } = pageContext
-  console.log("g", group)
-  const { edges, totalCount } = data.allMarkdownRemark
-  const tagHeader = `${totalCount} post${
-    totalCount === 1 ? "" : "s"
-  } tagged with "${tag}"`
-  const siteTitle = intl.formatMessage({
-    id: data?.site?.siteMetadata?.title || `Tags`,
-  })
+  const intl = useIntl(),
+    { group } = useAllTags(),
+    { tag } = pageContext,
+    { edges, totalCount } = data.allMarkdownRemark,
+    tagHeader = `${totalCount} post${
+      totalCount === 1 ? "" : "s"
+    } tagged with "${tag}"`,
+    siteTitle = intl.formatMessage({
+      id: data?.site?.siteMetadata?.title || `Tags`,
+    }),
+    currentTag = getQuery("tag", location?.search)
 
   return (
     <Layout location={location} title={siteTitle}>
-      <SEO title={intl.formatMessage({ id: `title` })} />
+      <SEO
+        title={
+          intl.formatMessage({ id: `tags` }) +
+          (currentTag ? " - " + intl.formatMessage({ id: currentTag }) : "")
+        }
+      />
+
       <div>
-        <h1>{tagHeader}</h1>
+        <h1>
+          {tagHeader}
+          {currentTag}
+        </h1>
         <ul>
           {group.map(({ fieldValue }) => {
             return (
               <li key={fieldValue}>
-                <Link to={`/tags/${fieldValue}`}>{fieldValue}</Link>
+                <Link to={`/tags?tag=${fieldValue}`}>{fieldValue}</Link>
               </li>
             )
           })}
