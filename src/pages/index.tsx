@@ -1,13 +1,37 @@
 import React from "react"
+import lodash from "lodash"
 import { graphql, useStaticQuery } from "gatsby"
 import { Link, FormattedMessage, useIntl } from "gatsby-plugin-intl"
 import Layout from "../layouts/layout"
 import SEO from "../components/seo"
-import { Chip, List, ListItem } from "@material-ui/core"
-import CheckCircleIcon from "@material-ui/icons/CheckCircle"
-import tw from "twin.macro"
+import {
+  Card,
+  CardActionArea,
+  CardMedia,
+  makeStyles,
+  CardContent,
+  Typography,
+  Grid,
+} from "@material-ui/core"
 
-const BlogIndexPage = ({ location }) => {
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 345,
+  },
+  postCard: {
+    margin: 16,
+  },
+  mediaBig: {
+    height: 300,
+    backgroundPosition: "center",
+  },
+  mediaCommon: {
+    height: 150,
+    backgroundPosition: "center",
+  },
+})
+
+const BlogIndexPage = ({ location }: { location: Location }) => {
   console.log(location)
   let intl = useIntl()
   let data = useStaticQuery(pageQuery)
@@ -15,6 +39,7 @@ const BlogIndexPage = ({ location }) => {
     id: data.site.siteMetadata?.title || `Title`,
   })
   let posts = data.allMarkdownRemark.nodes
+  let classes = useStyles()
 
   if (posts.length === 0) {
     return (
@@ -34,48 +59,46 @@ const BlogIndexPage = ({ location }) => {
     <Layout location={location} title={siteTitle}>
       <SEO title={intl.formatMessage({ id: `title` })} />
       <FormattedMessage id="welcome" />
-      <List style={{ listStyle: `none` }}>
+      <Grid container spacing={3}>
         {posts
           .filter(post => post.frontmatter?.visitable !== 0)
-          .map(post => {
-            let title = post.frontmatter.title || post.fields.slug
-
+          .map(function ({ frontmatter, fields }, key) {
+            let thumb =
+              frontmatter.img ??
+              require(`../${lodash.replace(fields.generatedCoverSlug, "", "")}`)
             return (
-              <ListItem key={post.fields.slug}>
-                <article
-                  className="post-list-item"
-                  itemScope
-                  itemType="http://schema.org/Article"
-                >
-                  <header>
-                    <h2>
-                      <Link to={post.fields.slug} itemProp="url">
-                        <span itemProp="headline">{title}</span>
-                      </Link>
-                      {post.frontmatter.visitable !== 0 ? (
-                        <span css={[tw`p-2 text-green-400`]}>
-                          <CheckCircleIcon color="inherit" />
-                        </span>
-                      ) : null}
-                    </h2>
-                    {post.frontmatter.tags?.map(pt => (
-                      <Chip label={pt}></Chip>
-                    ))}
-                    <small>{post.frontmatter.date}</small>
-                  </header>
-                  <section>
-                    <p
-                      dangerouslySetInnerHTML={{
-                        __html: post.frontmatter.description || post.excerpt,
-                      }}
-                      itemProp="description"
+              <Grid
+                key={frontmatter.id}
+                xs={key == 0 ? 12 : 6}
+                style={{ height: "auto", paddingBottom: "1em" }}
+              >
+                <Card className={classes.postCard}>
+                  <CardActionArea href={fields.slug}>
+                    <CardMedia
+                      className={
+                        key == 0 ? classes.mediaBig : classes.mediaCommon
+                      }
+                      image={thumb}
+                      title={frontmatter.title}
                     />
-                  </section>
-                </article>
-              </ListItem>
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {frontmatter.title}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="p"
+                      >
+                        {frontmatter.description}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grid>
             )
           })}
-      </List>
+      </Grid>
     </Layout>
   )
 }
@@ -94,6 +117,7 @@ export const pageQuery = graphql`
         excerpt
         fields {
           slug
+          generatedCoverSlug
         }
         frontmatter {
           date(formatString: "MMMM DD, YYYY")

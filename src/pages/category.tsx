@@ -4,8 +4,8 @@ import { graphql } from "gatsby"
 import Layout from "../layouts/layout"
 import SEO from "../components/seo"
 import PostsList from "../components/postsList"
-
-const CategoryTemplate = (props) => {
+//  todo
+const CategoryTemplate = props => {
   const { category } = props.pageContext
   return (
     <Layout location={props.location} title={`Posts in category "${category}"`}>
@@ -22,29 +22,28 @@ const CategoryTemplate = (props) => {
 }
 
 export const pageQuery = graphql`
-    query CategoryPage($category: String) {
-        allMarkdownRemark(
-            limit: 1000
-            filter: { fields: { category: { eq: $category } } }
-        ) {
-            totalCount
-            edges {
-                node {
-                    fields {
-                        slug
-                        category
-                    }
-                    excerpt
-                    timeToRead
-                    frontmatter {
-                        title
-                        date
-                    }
-                }
-            }
-            
+  query CategoryPage($category: String) {
+    allMarkdownRemark(
+      limit: 1000
+      filter: { fields: { category: { eq: $category } } }
+    ) {
+      totalCount
+      edges {
+        node {
+          fields {
+            slug
+            category
+          }
+          excerpt
+          timeToRead
+          frontmatter {
+            title
+            date
+          }
         }
+      }
     }
+  }
 `
 
 export default CategoryTemplate

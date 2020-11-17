@@ -7,7 +7,14 @@ import FooterWidget from "../components/footer"
 import { useIntl } from "gatsby-plugin-intl"
 import { graphql, useStaticQuery } from "gatsby"
 
-const Layout = ({ location, title, children }) => {
+const Layout = ({
+  location,
+  children,
+}: {
+  location: Location
+  title: String
+  children: any
+}) => {
   const intl = useIntl()
   const rootPath = `${__PATH_PREFIX__}/`
   const isRootPath = location?.pathname === rootPath
@@ -18,11 +25,11 @@ const Layout = ({ location, title, children }) => {
 
   return (
     <>
-      <HeaderWidget title={`${title ?? ""}`} isRootPath={isRootPath} />
-      <GlobalStyles />
+      <HeaderWidget title={`${siteTitle}`.toString()} isRootPath={isRootPath} />
       <div className="global-wrapper" data-is-root-path={isRootPath}>
         <main>{children}</main>
       </div>
+      <GlobalStyles />
       <FooterWidget />
     </>
   )

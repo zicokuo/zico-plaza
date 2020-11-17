@@ -47,20 +47,11 @@ const HeaderWidget = ({ isRootPath = true, title = null }, props: Props) => {
   const { site } = useStaticQuery(pageQuery),
     pageTitle = site?.siteMetadata?.title || props?.title || ""
 
-  let HeaderLogo
-  if (isRootPath) {
-    HeaderLogo = () => (
-      <Link to="/">
-        <FormattedMessage id={`${pageTitle || title}`} />
-      </Link>
-    )
-  } else {
-    HeaderLogo = () => (
-      <Link className="header-link-home" to="/">
-        <FormattedMessage id={`${pageTitle || title}`} />
-      </Link>
-    )
-  }
+  let HeaderLogo = () => (
+    <Link className="header-link-home" to="/">
+      <FormattedMessage id={`${pageTitle || title}`} />
+    </Link>
+  )
 
   const classes = makeStyles(theme =>
     createStyles({
