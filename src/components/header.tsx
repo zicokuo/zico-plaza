@@ -60,6 +60,7 @@ const HeaderWidget = ({ isRootPath = true, title = null }, props: Props) => {
         maxWidth: "1200px",
         margin: "auto",
         justifyContent: "center",
+        backGround: "#333",
       },
       langSwitch: {
         position: "relative",
@@ -74,16 +75,16 @@ const HeaderWidget = ({ isRootPath = true, title = null }, props: Props) => {
         <PcOnly>
           <Toolbar classes={classes()} disableGutters={true}>
             <HeaderLogo></HeaderLogo>
-            {/* <SiteNavWidget></SiteNavWidget> */}
+            <SiteNavWidget></SiteNavWidget>
             <div css={[tw`absolute right-0 ml-4`]}>
-              {/* <LangSwitchWidget></LangSwitchWidget> */}
+              <LangSwitchWidget></LangSwitchWidget>
             </div>
           </Toolbar>
         </PcOnly>
         <MobileOnly>
           <div css={[tw`flex items-center justify-between`]}>
             <div css={[tw`flex-1 p-2 text-white`]}>
-              {/* <SiteNavWidget></SiteNavWidget> */}
+              <SiteNavWidget></SiteNavWidget>
             </div>
             <Typography variant="h6" css={[tw`flex-1 text-center text-white `]}>
               <HeaderLogo></HeaderLogo>

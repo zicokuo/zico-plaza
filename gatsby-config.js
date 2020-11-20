@@ -1,3 +1,13 @@
+/*
+ * @Author: Zico
+ * @Date: 2020-10-21 10:43:41
+ * @LastEditors: Zico
+ * @LastEditTime: 2020-11-20 15:16:12
+ * @Description: eBayMonitor Server
+ * @FilePath: \zico-plaza\gatsby-config.js
+ */
+const HTTP_URI = `http://localhost:8000/___graphql`
+
 module.exports = {
     siteMetadata: {
         title: `Zico Plaza`,
@@ -10,11 +20,12 @@ module.exports = {
         social: {
             twitter: ``
         },
-        siteNav: [{
-                path: 'category',
-                label: 'Category',
-                type: 'category'
-            },
+        siteNav: [
+            // {
+            //     path: 'category',
+            //     label: 'Category',
+            //     type: 'category'
+            // },
             {
                 path: 'tags',
                 label: 'Tags',
@@ -49,10 +60,20 @@ module.exports = {
                 }
             }
         },
+        //    apollo client
+        {
+            resolve: `gatsby-theme-apollo`
+        },
         {
             resolve: `gatsby-plugin-dynamic-routes`,
             options: {
                 routeFilePath: `src/routes.ts`
+            }
+        },
+        {
+            resolve: 'gatsby-plugin-apollo',
+            options: {
+                uri: HTTP_URI
             }
         },
         // {

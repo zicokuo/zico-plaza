@@ -5,6 +5,7 @@ const createImage = require(`gatsby-plugin-blog-cover`)
 const {
   createFilePath
 } = require(`gatsby-source-filesystem`)
+
 exports.onCreateWebpackConfig = ({
   stage,
   actions

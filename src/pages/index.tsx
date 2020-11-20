@@ -12,6 +12,9 @@ import {
   CardContent,
   Typography,
   Grid,
+  Chip,
+  CardActions,
+  Container,
 } from "@material-ui/core"
 
 const useStyles = makeStyles({
@@ -19,10 +22,10 @@ const useStyles = makeStyles({
     maxWidth: 345,
   },
   postCard: {
-    margin: 16,
+    margin: 2,
   },
   mediaBig: {
-    height: 300,
+    height: 250,
     backgroundPosition: "center",
   },
   mediaCommon: {
@@ -32,14 +35,13 @@ const useStyles = makeStyles({
 })
 
 const BlogIndexPage = ({ location }: { location: Location }) => {
-  console.log(location)
-  let intl = useIntl()
-  let data = useStaticQuery(pageQuery)
-  let siteTitle = intl.formatMessage({
-    id: data.site.siteMetadata?.title || `Title`,
-  })
-  let posts = data.allMarkdownRemark.nodes
-  let classes = useStyles()
+  const intl = useIntl(),
+    data = useStaticQuery(pageQuery),
+    siteTitle = intl.formatMessage({
+      id: data.site.siteMetadata?.title || `Title`,
+    }),
+    { posts } = data.allMarkdownRemark,
+    classes = useStyles()
 
   if (posts.length === 0) {
     return (
@@ -58,48 +60,80 @@ const BlogIndexPage = ({ location }: { location: Location }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title={intl.formatMessage({ id: `title` })} />
-      <FormattedMessage id="welcome" />
-      <Grid container spacing={3}>
-        {posts
-          .filter(post => post.frontmatter?.visitable !== 0)
-          .map(function ({ frontmatter, fields }, key) {
-            let thumb =
-              frontmatter.img ?? require(`../${fields.generatedCoverSlug}`)
-            return (
-              <Grid
-                item
-                key={frontmatter.id}
-                md={key == 0 ? 12 : 6}
-                xs={12}
-                style={{ height: "auto", paddingBottom: "1em" }}
-              >
-                <Card className={classes.postCard}>
-                  <CardActionArea href={fields.slug}>
-                    <CardMedia
-                      className={
-                        key == 0 ? classes.mediaBig : classes.mediaCommon
-                      }
-                      image={thumb}
-                      title={frontmatter.title}
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {frontmatter.title}
-                      </Typography>
+
+      <h6>
+        <FormattedMessage id="welcome" />
+      </h6>
+      <Container>
+        <Grid container spacing={2}>
+          {posts
+            .filter(post => post.frontmatter?.visitable !== 0)
+            .map(function ({ id, frontmatter, fields }, key) {
+              let thumb =
+                frontmatter.img ?? require(`../${fields.generatedCoverSlug}`)
+              return (
+                <Grid
+                  item
+                  key={id}
+                  md={key < 1 ? 8 : 4}
+                  xs={12}
+                  style={{
+                    height: "auto",
+                    paddingBottom: "1em",
+                    backgroundColor: "#eee",
+                  }}
+                >
+                  <Card key={`postCard-${id}`} className={classes.postCard}>
+                    <CardActionArea href={fields.slug}>
+                      <CardMedia
+                        className={
+                          key < 1 ? classes.mediaBig : classes.mediaCommon
+                        }
+                        image={thumb}
+                        title={frontmatter.title}
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                          {frontmatter.title}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                        >
+                          {frontmatter.date}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                        >
+                          {frontmatter.description}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                    <CardActions>
                       <Typography
                         variant="body2"
                         color="textSecondary"
-                        component="p"
+                        component="small"
                       >
-                        {frontmatter.description}
+                        {frontmatter.tags.map(tag => (
+                          <Chip
+                            key={`${frontmatter.id}-${tag}`}
+                            size={"small"}
+                            clickable={true}
+                            label={tag}
+                          />
+                        ))}
                       </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
-              </Grid>
-            )
-          })}
-      </Grid>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              )
+            })}
+        </Grid>
+      </Container>
     </Layout>
   )
 }
@@ -114,7 +148,8 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      nodes {
+      posts: nodes {
+        id
         excerpt
         fields {
           slug

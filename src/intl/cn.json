@@ -16,6 +16,8 @@
     },
     "Zico Plaza":"Zico乐园",
     "cn":"中文",
-    "Author":"作者"
-
+    "Author":"作者",
+"langSwitch":"多语言",
+"Tags":"标签",
+"frontend":"前端"
 }
