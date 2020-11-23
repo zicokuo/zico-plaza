@@ -10,10 +10,10 @@ enDescription: It is used to standardize the front-end rich text editor, reduce 
 tags:
  - Frontend
  - RichText
-
+ - Quill
 ---
 
-## 序
+# 序
 
 富文本的发展伴随着 WEB 前端的发展已经走过一段时期；
 
@@ -45,7 +45,7 @@ Quill也是一款比较出名的富文本编辑器，Quill提出了一种利用 
 
 Delta语法并不需要人工维护，使用Quill内部的转换工具即可实现 `输入` - `代码` - `储存` - `渲染` 4个环节的双向转化；
 
-## Quill
+# Quill
 
 [官网](https://quilljs.com/)
 
@@ -53,9 +53,9 @@ Delta语法并不需要人工维护，使用Quill内部的转换工具即可实�
 
 <center>Quill 编辑器界面</center>
 
-### 部署
+## 部署
 
-```html
+```javascript
 // <link href="https://cdn.quilljs.com/1.2.6/quill.snow.css" rel="stylesheet">
 // <script src="https://cdn.quilljs.com/1.2.6/quill.min.js"></script>
 
@@ -77,3 +77,69 @@ var quill = new Quill('#editor', {
   on <a href="https://codepen.io">CodePen</a>.</span>
 </p>
 <script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<center>CodePen 调试</center>
+
+## 配置
+
+```javascript
+var toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'],        // 切换按钮
+  ['blockquote', 'code-block'],
+
+  [{ 'header': 1 }, { 'header': 2 }],               // 用户自定义按钮值
+  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+  [{ 'script': 'sub'}, { 'script': 'super' }],      // 上标/下标
+  [{ 'indent': '-1'}, { 'indent': '+1' }],          // 减少缩进/缩进
+  [{ 'direction': 'rtl' }],                         // 文本下划线
+
+  [{ 'size': ['small', false, 'large', 'huge'] }],  // 用户自定义下拉
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+  [{ 'color': [] }, { 'background': [] }],          // 主题默认下拉，使用主题提供的值
+  [{ 'font': [] }],
+  [{ 'align': [] }],
+
+  ['clean']                                         // 清除格式
+];
+
+var quill = new Quill('#editor', {
+  modules: {
+    toolbar: toolbarOptions
+  },
+  theme: 'snow'
+});
+
+ // 配置案例转自 https://www.jianshu.com/p/b237372f15cc
+```
+
+![image-20201123133011496](https://raw.githubusercontent.com/zicokuo/zicoPicoGo/master/blog/imgs/20201123133012.png)
+
+<center>完整配置展示图</center>
+
+## Delta
+
+Delta大约是这样子：
+
+```javascript
+{
+  ops: [
+    { insert: 'Gandalf', attributes: { bold: true } },
+    { insert: ' the ' },
+    { insert: 'Grey', attributes: { color: '#cccccc' } }
+  ]
+}
+```
+
+简单来说，这是一种严谨模式的Json，按顺序记录了文本内容的动作、属性等，方便编译器编译和还原；
+
+Delta的好处在于标准化拆分内容和样式之后，更利于保留内容的一致性；并且可以十分方便的去处html标签隐含的特殊字符、乱码等问题；
+
+### Delta转换HTML
+
+Npm包可以快速实现Delta转HTML
+
+[NPM - DeltaDataToHTML](https://www.npmjs.com/package/quill-delta-to-html)
+
+更多快捷用法可以参考：[NPM - Search for delta](https://www.npmjs.com/search?q=delta)
+
