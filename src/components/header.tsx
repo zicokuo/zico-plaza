@@ -16,6 +16,7 @@ import ShareIcon from "@material-ui/icons/Share"
 import { graphql, useStaticQuery } from "gatsby"
 import LangSwitchWidget from "./langSwitch"
 import { createStyles, makeStyles } from "@material-ui/styles"
+import { HeaderEmbedSearchComp } from "@/src/components/headerEmbedSearch"
 
 interface Props {
   /**
@@ -71,7 +72,7 @@ const HeaderWidget = ({ isRootPath = true, title = null }, props: Props) => {
 
   return (
     <ElevationScrollWrapper {...props}>
-      <AppBar position={"sticky"}>
+      <AppBar position={"sticky"} color={"inherit"}>
         <PcOnly>
           <Toolbar classes={classes()} disableGutters={true}>
             <HeaderLogo></HeaderLogo>
@@ -96,6 +97,7 @@ const HeaderWidget = ({ isRootPath = true, title = null }, props: Props) => {
             </div>
           </div>
         </MobileOnly>
+        <HeaderEmbedSearchComp  isShow={true}/>
       </AppBar>
     </ElevationScrollWrapper>
   )

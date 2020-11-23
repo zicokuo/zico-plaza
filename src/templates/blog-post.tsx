@@ -3,6 +3,8 @@ import { graphql, Link } from "gatsby"
 
 import Layout from "../layouts/layout"
 import SEO from "../components/seo"
+import 'gitalk/dist/gitalk.css'
+import GitalkComponent from "gitalk/dist/gitalk-component";
 
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
@@ -58,6 +60,9 @@ const BlogPostTemplate = ({ data, location }) => {
           </li>
         </ul>
       </nav>
+      <GitalkComponent options={{
+        clientID: "...",
+      }}></GitalkComponent>
     </Layout>
   )
 }

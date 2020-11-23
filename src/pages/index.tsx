@@ -1,7 +1,6 @@
 import React from "react"
-import lodash from "lodash"
 import { graphql, useStaticQuery } from "gatsby"
-import { Link, FormattedMessage, useIntl } from "gatsby-plugin-intl"
+import { FormattedMessage, useIntl } from "gatsby-plugin-intl"
 import Layout from "../layouts/layout"
 import SEO from "../components/seo"
 import {
@@ -16,12 +15,16 @@ import {
   CardActions,
   Container,
 } from "@material-ui/core"
+import { WelcomeWidget } from "../sections/home/welcomeWidget"
 
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
   },
   postCard: {
+    margin: 2,
+  },
+  postCardChip: {
     margin: 2,
   },
   mediaBig: {
@@ -60,11 +63,8 @@ const BlogIndexPage = ({ location }: { location: Location }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title={intl.formatMessage({ id: `title` })} />
-
-      <h6>
-        <FormattedMessage id="welcome" />
-      </h6>
       <Container>
+        <WelcomeWidget />
         <Grid container spacing={2}>
           {posts
             .filter(post => post.frontmatter?.visitable !== 0)
@@ -118,8 +118,9 @@ const BlogIndexPage = ({ location }: { location: Location }) => {
                         color="textSecondary"
                         component="small"
                       >
-                        {frontmatter.tags.map(tag => (
+                        {frontmatter.tags.map((tag: String) => (
                           <Chip
+                            className={classes.postCardChip}
                             key={`${frontmatter.id}-${tag}`}
                             size={"small"}
                             clickable={true}
