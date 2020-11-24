@@ -2059,6 +2059,21 @@
     escape-string-regexp "^2.0.0"
     lodash.deburr "^4.1.0"
 
+"@suziwen/gitalk@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/@suziwen/gitalk/-/gitalk-2.0.1.tgz#0af576ccfc9cecc749a76be8802b1a78402fd27e"
+  integrity sha512-UD3CiG8tZgyB/1XYOKWFFIS6t3AUr6ShezhthoYw2Hrth0/l1eQt6FWWvC8I1ZS24azNdHquvVkXAD41I71L6w==
+  dependencies:
+    autosize "3.0.21"
+    axios "0.19.2"
+    date-fns "1.28.5"
+    es6-promise "4.1.1"
+    github-markdown-css "2.8.0"
+    node-polyglot "2.2.2"
+    preact "8.1.0"
+    preact-compat "3.16.0"
+    react-flip-move "2.9.14"
+
 "@szmarczak/http-timer@^1.1.2":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@szmarczak/http-timer/-/http-timer-1.1.2.tgz#b1665e2c461a2cd92f4c1bbf50d5454de0d4b421"
@@ -7672,6 +7687,13 @@ gatsby-plugin-feed@^2.5.14:
     lodash.merge "^4.6.2"
     rss "^1.2.2"
 
+gatsby-plugin-gitalk@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.npmjs.org/gatsby-plugin-gitalk/-/gatsby-plugin-gitalk-1.2.1.tgz#a989b51ae10f5cd7e35661f3510d97361c9f06db"
+  integrity sha512-c+FxcmykPOBP7FoCquqnHllwF4dYDfXEtOtS6dvYBNAXPMJkga9gQI+H7M3DJFEPlJi7DMW1S0Xv8Ro3/CID1A==
+  dependencies:
+    "@suziwen/gitalk" "^2.0.1"
+
 gatsby-plugin-google-analytics@^2.3.18:
   version "2.3.18"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-google-analytics/-/gatsby-plugin-google-analytics-2.3.18.tgz#23ce40c57091e925a9d333b4bd3c5e586a39dfa4"
@@ -8373,21 +8395,6 @@ git-up@^4.0.2:
   dependencies:
     is-ssh "^1.3.0"
     parse-url "^5.0.0"
-
-gitalk@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.npmjs.org/gitalk/-/gitalk-1.7.0.tgz#515c8a14f3e3ff459910a1c4e3518b855bdb8328"
-  integrity sha512-QvRSS0XZkLMSW/Z/t8CShAruAUAY4d1OyecA/yFnujvY3ftfwaT1OzTF3cWweB3jBPHlxi2g4GSdnLtUqnnrqw==
-  dependencies:
-    autosize "3.0.21"
-    axios "0.19.2"
-    date-fns "1.28.5"
-    es6-promise "4.1.1"
-    github-markdown-css "2.8.0"
-    node-polyglot "2.2.2"
-    preact "8.1.0"
-    preact-compat "3.16.0"
-    react-flip-move "2.9.14"
 
 github-from-package@0.0.0:
   version "0.0.0"
