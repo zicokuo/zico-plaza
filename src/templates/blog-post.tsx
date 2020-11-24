@@ -4,7 +4,9 @@ import { graphql, Link } from "gatsby"
 import Layout from "../layouts/layout"
 import SEO from "../components/seo"
 // @ts-ignore
-import Gitalk, { GitalkPluginHelper } from "gatsby-plugin-gitalk/index.js"
+import Gitalk from "gatsby-plugin-gitalk/index.js"
+import '@suziwen/gitalk/dist/gitalk.css'
+import { Divider } from "@material-ui/core"
 
 const BlogPostTemplate = ({ data, location }: { data: any, location: any }) => {
   const post = data.markdownRemark
@@ -12,7 +14,8 @@ const BlogPostTemplate = ({ data, location }: { data: any, location: any }) => {
   const { previous, next } = data
   const gitalkConfig = {
     id: post.slug || post.id,
-    title: post.title,
+    title: post.enTitle,
+    createIssueManually: true
   }
 
   return (
@@ -38,7 +41,6 @@ const BlogPostTemplate = ({ data, location }: { data: any, location: any }) => {
         />
         <hr />
       </article>
-      <Gitalk options={gitalkConfig} />
       <nav className="blog-post-nav">
         <ul
           style={{
@@ -65,6 +67,8 @@ const BlogPostTemplate = ({ data, location }: { data: any, location: any }) => {
           </li>
         </ul>
       </nav>
+      <Divider variant="middle" />
+      <Gitalk options={gitalkConfig} />
     </Layout>
   )
 }

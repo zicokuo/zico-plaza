@@ -6,10 +6,10 @@ import { FormattedMessage, Link } from "gatsby-plugin-intl"
 import { AppBar, Avatar, Grid, IconButton, Toolbar, Typography, useScrollTrigger } from "@material-ui/core"
 import SiteNavWidget from "./siteNav"
 import { MobileOnly, PcOnly } from "./commonStyledComponents"
-import { Search, Share } from "@material-ui/icons"
+import { Share } from "@material-ui/icons"
 import { graphql, useStaticQuery } from "gatsby"
 import { createStyles, makeStyles } from "@material-ui/styles"
-import { HeaderEmbedSearchComp } from "@/src/sections/header/headerEmbedSearch"
+import  HeaderEmbedSearchComp  from "@/src/sections/header/headerEmbedSearch"
 
 interface Props {
   /**
@@ -66,8 +66,6 @@ const HeaderWidget = ({ title, theme }: { isRootPath: boolean, title: string, th
       </Grid>
     </Link>
   )
-
-
 
   return (
     <ElevationScrollWrapper  {...props}>
