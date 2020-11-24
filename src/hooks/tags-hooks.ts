@@ -39,7 +39,5 @@ export const useAllTags = () => {
     }
   `)
 
-  console.log("ddd", allMarkdownRemark)
-
   return allMarkdownRemark
 }

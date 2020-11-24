@@ -12,3 +12,4 @@ import "./static/maize.css"
 import InjectProvider from '@/src/lib/inject-provider'
 const preferDefault = m => (m && m.default) || m
 export const wrapRootElement = preferDefault(InjectProvider)
+
