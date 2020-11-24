@@ -46,10 +46,13 @@ const SiteNavWidget = ({}) => {
     <nav>
       {/* pc导航 */}
       <HeaderNav as={Toolbar}>
-        {siteNav.map((nav: { path: string; label: React.ReactNode }) => {
+        {siteNav.map((nav: { path: string; label: React.ReactNode }, idx) => {
           return (
-            <HeaderNavItem>
-              <Link to={nav?.path?.match("^/") ? nav : `/${nav.path}`}>
+            <HeaderNavItem key={`${idx}-${nav?.path}`}>
+              <Link
+                key={`${idx}-${nav?.path}-link`}
+                to={nav?.path?.match("^/") ? nav : `/${nav.path}`}
+              >
                 {nav?.label}
               </Link>
             </HeaderNavItem>
@@ -68,19 +71,24 @@ const SiteNavWidget = ({}) => {
           onClose={_ => setDrawerOpen(false)}
         >
           <List>
-            {siteNav.map((nav: { path: string; label: React.ReactNode }) => {
-              return (
-                <ListItem>
-                  <Link
-                    to={
-                      nav?.path?.match("^/") ? nav : (`/${nav.path}` as String)
-                    }
-                  >
-                    {nav?.label}
-                  </Link>
-                </ListItem>
-              )
-            })}
+            {siteNav.map(
+              (nav: { path: string; label: React.ReactNode }, idx) => {
+                return (
+                  <ListItem>
+                    <Link
+                      key={`${idx}-${nav?.path}-mo-link`}
+                      to={
+                        nav?.path?.match("^/")
+                          ? nav
+                          : (`/${nav.path}` as String)
+                      }
+                    >
+                      {nav?.label}
+                    </Link>
+                  </ListItem>
+                )
+              }
+            )}
           </List>
         </Drawer>
       </MobileHeaderNav>

@@ -1,14 +1,14 @@
 //  站点头部
 // @ts-ignore
 import React from "react"
-import tw, { styled } from "twin.macro"
+import tw from "twin.macro"
 import { FormattedMessage, Link } from "gatsby-plugin-intl"
 import {
   AppBar,
-  IconButton,
+  IconButton, Theme,
   Toolbar,
   Typography,
-  useScrollTrigger,
+  useScrollTrigger
 } from "@material-ui/core"
 import SiteNavWidget from "./siteNav"
 import { MobileOnly, PcOnly } from "./commonStyledComponents"
@@ -16,6 +16,7 @@ import ShareIcon from "@material-ui/icons/Share"
 import { graphql, useStaticQuery } from "gatsby"
 import LangSwitchWidget from "./langSwitch"
 import { createStyles, makeStyles } from "@material-ui/styles"
+import { HeaderEmbedSearchComp } from "@/src/components/headerEmbedSearch"
 
 interface Props {
   /**
@@ -42,10 +43,26 @@ const ElevationScrollWrapper = (props: Props) => {
     elevation: scrollTrigger ? 4 : 0,
   })
 }
+const useStyles = makeStyles((theme:any) =>
+  createStyles({
+    root: {
+      position: "relative",
+      maxWidth: "1200px",
+      margin: "auto",
+      justifyContent: "center",
+      backGround: theme?.colors?.background,
+    },
+    langSwitch: {
+      position: "relative",
+      right: "1em",
+    },
+  })
+)
 
-const HeaderWidget = ({ isRootPath = true, title = null }, props: Props) => {
+const HeaderWidget = ({ isRootPath = true, title = null,theme }, props: Props) => {
   const { site } = useStaticQuery(pageQuery),
-    pageTitle = site?.siteMetadata?.title || props?.title || ""
+    pageTitle = site?.siteMetadata?.title || props?.title || "",
+    classes = useStyles(theme);
 
   let HeaderLogo = () => (
     <Link className="header-link-home" to="/">
@@ -53,37 +70,24 @@ const HeaderWidget = ({ isRootPath = true, title = null }, props: Props) => {
     </Link>
   )
 
-  const classes = makeStyles(theme =>
-    createStyles({
-      root: {
-        position: "relative",
-        maxWidth: "1200px",
-        margin: "auto",
-        justifyContent: "center",
-      },
-      langSwitch: {
-        position: "relative",
-        right: "1em",
-      },
-    })
-  )
+
 
   return (
     <ElevationScrollWrapper {...props}>
-      <AppBar position={"sticky"}>
+      <AppBar position={"sticky"} color={"inherit"}>
         <PcOnly>
-          <Toolbar classes={classes()} disableGutters={true}>
+          <Toolbar classes={classes} disableGutters={true}>
             <HeaderLogo></HeaderLogo>
-            {/* <SiteNavWidget></SiteNavWidget> */}
+            <SiteNavWidget></SiteNavWidget>
             <div css={[tw`absolute right-0 ml-4`]}>
-              {/* <LangSwitchWidget></LangSwitchWidget> */}
+              <LangSwitchWidget></LangSwitchWidget>
             </div>
           </Toolbar>
         </PcOnly>
         <MobileOnly>
           <div css={[tw`flex items-center justify-between`]}>
             <div css={[tw`flex-1 p-2 text-white`]}>
-              {/* <SiteNavWidget></SiteNavWidget> */}
+              <SiteNavWidget></SiteNavWidget>
             </div>
             <Typography variant="h6" css={[tw`flex-1 text-center text-white `]}>
               <HeaderLogo></HeaderLogo>
@@ -95,6 +99,7 @@ const HeaderWidget = ({ isRootPath = true, title = null }, props: Props) => {
             </div>
           </div>
         </MobileOnly>
+        <HeaderEmbedSearchComp  isShow={true}/>
       </AppBar>
     </ElevationScrollWrapper>
   )

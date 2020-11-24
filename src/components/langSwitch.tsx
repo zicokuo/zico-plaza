@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import {
   FormControl,
   InputLabel,
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme =>
 const LangSwitchWidget = () => {
   const classes = useStyles({ color: "#FFF" }),
     { langs } = useStaticQuery(widgetQuery),
-    [langChoice, setLangChoice] = React.useState(""),
+    [langChoice, setLangChoice] = useState(""),
     handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
       setLangChoice(event.target.value as string)
     }
@@ -36,8 +36,8 @@ const LangSwitchWidget = () => {
       value={langChoice}
       onChange={handleChange}
     >
-      {langs?.options?.lang.map(lang => (
-        <MenuItem value={lang}>
+      {langs?.options?.lang.map((lang, idx) => (
+        <MenuItem key={idx} value={lang}>
           <em>{String(lang).toUpperCase()}</em>
         </MenuItem>
       ))}

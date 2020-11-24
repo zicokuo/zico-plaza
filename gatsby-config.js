@@ -1,3 +1,11 @@
+/*
+ * @Author: Zico
+ * @Date: 2020-10-21 10:43:41
+ * @LastEditors: Zico
+ * @LastEditTime: 2020-11-20 15:16:12
+ * @Description: eBayMonitor Server
+ * @FilePath: \zico-plaza\gatsby-config.js
+ */
 module.exports = {
     siteMetadata: {
         title: `Zico Plaza`,
@@ -10,11 +18,12 @@ module.exports = {
         social: {
             twitter: ``
         },
-        siteNav: [{
-                path: 'category',
-                label: 'Category',
-                type: 'category'
-            },
+        siteNav: [
+            // {
+            //     path: 'category',
+            //     label: 'Category',
+            //     type: 'category'
+            // },
             {
                 path: 'tags',
                 label: 'Tags',
@@ -49,10 +58,20 @@ module.exports = {
                 }
             }
         },
+        //    apollo client
+        {
+            resolve: `gatsby-theme-apollo`
+        },
         {
             resolve: `gatsby-plugin-dynamic-routes`,
             options: {
                 routeFilePath: `src/routes.ts`
+            }
+        },
+        {
+            resolve: 'gatsby-plugin-apollo',
+            options: {
+                uri:  `http://localhost:8000/___graphql`
             }
         },
         // {
@@ -192,9 +211,22 @@ module.exports = {
                         // It's important to specify the maxWidth (in pixels) of
                         // the content container as this plugin uses this as the
                         // base for generating different widths of each image.
-                        maxWidth: 590,
-                    },
-                }, ]
+                        maxWidth: 590
+                    }
+                }]
+            }
+        }, {
+            //  gitalk 留言
+            resolve: `gatsby-plugin-gitalk`,
+            options: {
+                config: {
+                    clientID: "9cdb3b2c53495acbb5c9",
+                    clientSecret: "bc464af694dcd1dcb480971b8e902edd90d3629d",
+                    repo: "zico-plaza",      // The repository of store comments,
+                    owner: "zicokuo",
+                    admin: ["zicokuo"],
+                    distractionFreeMode: false  // Faceb }
+                }
             }
         }
 

@@ -1,7 +1,7 @@
 ---
 title: MongoDb 副本集开发笔记01
 enTitle: Mongodb replica set development notes 01
-createAt: 2020-02-02 09:11
+date: 2020-02-02 09:11
 author: Zico
 category: Mongodb
 visitable: 1

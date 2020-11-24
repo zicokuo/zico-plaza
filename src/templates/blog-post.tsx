@@ -3,11 +3,17 @@ import { graphql, Link } from "gatsby"
 
 import Layout from "../layouts/layout"
 import SEO from "../components/seo"
+// @ts-ignore
+import Gitalk, { GitalkPluginHelper } from "gatsby-plugin-gitalk/index.js"
 
-const BlogPostTemplate = ({ data, location }) => {
+const BlogPostTemplate = ({ data, location }: { data: any, location: any }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
+  const gitalkConfig = {
+    id: post.slug || post.id,
+    title: post.title,
+  }
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -32,6 +38,7 @@ const BlogPostTemplate = ({ data, location }) => {
         />
         <hr />
       </article>
+      <Gitalk options={gitalkConfig} />
       <nav className="blog-post-nav">
         <ul
           style={{
@@ -39,7 +46,7 @@ const BlogPostTemplate = ({ data, location }) => {
             flexWrap: `wrap`,
             justifyContent: `space-between`,
             listStyle: `none`,
-            padding: 0,
+            padding: 0
           }}
         >
           <li>

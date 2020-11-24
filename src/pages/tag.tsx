@@ -8,15 +8,9 @@ import Layout from "../layouts/layout"
 import { Link, useIntl } from "gatsby-plugin-intl"
 import SEO from "../components/seo"
 import { getQuery } from "clearlake"
-
-const Tags = ({ location, pageContext, data }) => {
+const Tags = ({ location, pageContext, data }: any): JSX.Element => {
   const intl = useIntl(),
     { group } = useAllTags(),
-    { tag } = pageContext,
-    { edges, totalCount } = data.allMarkdownRemark,
-    tagHeader = `${totalCount} post${
-      totalCount === 1 ? "" : "s"
-    } tagged with "${tag}"`,
     siteTitle = intl.formatMessage({
       id: data?.site?.siteMetadata?.title || `Tags`,
     }),
@@ -32,10 +26,7 @@ const Tags = ({ location, pageContext, data }) => {
       />
 
       <div>
-        <h1>
-          {tagHeader}
-          {currentTag}
-        </h1>
+        <h1>{currentTag}</h1>
         <ul>
           {group.map(({ fieldValue }) => {
             return (
@@ -45,10 +36,6 @@ const Tags = ({ location, pageContext, data }) => {
             )
           })}
         </ul>
-        {/*
-              This links to a page that does not yet exist.
-              You'll come back to it!
-            */}
         <Link to="/tags">All tags</Link>
       </div>
     </Layout>
@@ -79,7 +66,6 @@ Tags.propTypes = {
 }
 
 export default Tags
-
 export const pageQuery = graphql`
   query($tag: String) {
     allMarkdownRemark(

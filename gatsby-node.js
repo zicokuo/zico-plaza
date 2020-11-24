@@ -5,6 +5,7 @@ const createImage = require(`gatsby-plugin-blog-cover`)
 const {
   createFilePath
 } = require(`gatsby-source-filesystem`)
+
 exports.onCreateWebpackConfig = ({
   stage,
   actions
@@ -38,7 +39,7 @@ exports.createPages = async ({
     `
       {
         allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: ASC }
+          sort: { fields: [frontmatter___date], order: DESC }
           limit: 1000
         ) {
           nodes {
