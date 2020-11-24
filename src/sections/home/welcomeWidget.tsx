@@ -16,7 +16,7 @@ export const WelcomeWidget = () => {
       <FormattedMessage id="welcome" />
     </Typography>
     <Typography gutterBottom variant="body2" component="p">
-      这里是一个记录工作经验和个人爱好的Blog,如果喜欢可以收藏一下;
+      这里是一个记录工作经验和个人爱好的Blog，喜欢可以收藏一下；
     </Typography>
     </Paper>
   )

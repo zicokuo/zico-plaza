@@ -1,17 +1,13 @@
 import React, { useState } from "react"
 import {
-  FormControl,
-  InputLabel,
   Select,
   MenuItem,
   createStyles,
   makeStyles,
-  Theme,
-  createMuiTheme,
 } from "@material-ui/core"
 import { graphql, useStaticQuery } from "gatsby"
 
-const useStyles = makeStyles(theme =>
+const useStyles = makeStyles((theme:any) =>
   createStyles({
     root: {},
     select: {
@@ -36,7 +32,7 @@ const LangSwitchWidget = () => {
       value={langChoice}
       onChange={handleChange}
     >
-      {langs?.options?.lang.map((lang, idx) => (
+      {langs?.options?.lang.map((lang:string, idx:int) => (
         <MenuItem key={idx} value={lang}>
           <em>{String(lang).toUpperCase()}</em>
         </MenuItem>

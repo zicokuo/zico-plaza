@@ -1,22 +1,15 @@
 //  站点头部
 // @ts-ignore
-import React from "react"
+import React, { useState } from "react"
 import tw from "twin.macro"
 import { FormattedMessage, Link } from "gatsby-plugin-intl"
-import {
-  AppBar,
-  IconButton, Theme,
-  Toolbar,
-  Typography,
-  useScrollTrigger
-} from "@material-ui/core"
+import { AppBar, Avatar, Grid, IconButton, Toolbar, Typography, useScrollTrigger } from "@material-ui/core"
 import SiteNavWidget from "./siteNav"
 import { MobileOnly, PcOnly } from "./commonStyledComponents"
-import ShareIcon from "@material-ui/icons/Share"
+import { Search, Share } from "@material-ui/icons"
 import { graphql, useStaticQuery } from "gatsby"
-import LangSwitchWidget from "./langSwitch"
 import { createStyles, makeStyles } from "@material-ui/styles"
-import { HeaderEmbedSearchComp } from "@/src/components/headerEmbedSearch"
+import { HeaderEmbedSearchComp } from "@/src/sections/header/headerEmbedSearch"
 
 interface Props {
   /**
@@ -45,44 +38,48 @@ const ElevationScrollWrapper = (props: Props) => {
 }
 const useStyles = makeStyles((theme:any) =>
   createStyles({
+    AppBar:{
+      height:72
+    },
     root: {
       position: "relative",
       maxWidth: "1200px",
       margin: "auto",
-      justifyContent: "center",
-      backGround: theme?.colors?.background,
+      justifyContent: "start",
+      backGround: theme?.colors?.background
     },
-    langSwitch: {
-      position: "relative",
-      right: "1em",
+    HeaderLogo: {
+      backGround: theme?.colors?.cyan["500"],
     },
   })
 )
 
-const HeaderWidget = ({ isRootPath = true, title = null,theme }, props: Props) => {
-  const { site } = useStaticQuery(pageQuery),
+const HeaderWidget = ({ title, theme }: { isRootPath: boolean, title: string, theme: any }, props: Props) => {
+  let { site } = useStaticQuery(pageQuery),
     pageTitle = site?.siteMetadata?.title || props?.title || "",
-    classes = useStyles(theme);
-
-  let HeaderLogo = () => (
+    classes = useStyles(theme),
+    HeaderLogo = () => (
     <Link className="header-link-home" to="/">
-      <FormattedMessage id={`${pageTitle || title}`} />
+      <Grid container alignItems={"center"} >
+        <Avatar alt="Zico" src="/logo.png" css={[tw`m-4`]}  />
+        <FormattedMessage id={`${pageTitle || title}`} />
+      </Grid>
     </Link>
   )
 
 
 
   return (
-    <ElevationScrollWrapper {...props}>
-      <AppBar position={"sticky"} color={"inherit"}>
+    <ElevationScrollWrapper  {...props}>
+      <AppBar className={classes.AppBar} position={"sticky"} color={"inherit"}>
         <PcOnly>
-          <Toolbar classes={classes} disableGutters={true}>
-            <HeaderLogo></HeaderLogo>
-            <SiteNavWidget></SiteNavWidget>
-            <div css={[tw`absolute right-0 ml-4`]}>
-              <LangSwitchWidget></LangSwitchWidget>
-            </div>
-          </Toolbar>
+          <Grid classes={classes}  container alignItems={"center"}  wrap={"nowrap"}>
+            <Grid item><HeaderLogo></HeaderLogo></Grid>
+            <Grid item xs><SiteNavWidget ></SiteNavWidget></Grid>
+            <Grid item css={[tw`relative right-0`]}>
+              <HeaderEmbedSearchComp isShow={false}></HeaderEmbedSearchComp>
+            </Grid>
+          </Grid>
         </PcOnly>
         <MobileOnly>
           <div css={[tw`flex items-center justify-between`]}>
@@ -94,12 +91,11 @@ const HeaderWidget = ({ isRootPath = true, title = null,theme }, props: Props) =
             </Typography>
             <div css={[tw`flex-1 p-2 text-right text-white`]}>
               <IconButton>
-                <ShareIcon />
+                <Share />
               </IconButton>
             </div>
           </div>
         </MobileOnly>
-        <HeaderEmbedSearchComp  isShow={true}/>
       </AppBar>
     </ElevationScrollWrapper>
   )
