@@ -5,7 +5,7 @@ date: 2020-11-04 09:11
 author: Zico
 category: Mongodb
 visitable: 1
-description: 千万级别MongoDB(集群)使用优化记录
+description: 千万级别MongoDB(集群)使用优化记录01
 enDescription: Million level MongoDB (cluster) to optimize the use of records
 tags:
  - MongoDB
