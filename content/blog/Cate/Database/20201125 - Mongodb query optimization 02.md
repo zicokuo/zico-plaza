@@ -103,5 +103,14 @@ dbKoda同样支持查询优胜策略的分析和展示
 
 ### 5. Studio 3T
 
+Mongodb工具界中还有一款久负盛名的工具，Studio 3T
 
+![image-20201130165339787](https://raw.githubusercontent.com/zicokuo/zicoPicoGo/master/blog/imgs/20201130165341.png)
 
+<center>Studio 3T 工作界面</center>
+
+Studio 3T 拥有明确的界面和高级的查询功能，允许我们通过配置Aggreagate的pipeline进行任意拼装以及导入导出，查询结构内部支持Cursor，十分方便；
+
+导入导出工具还可以兼容一般那SQL数据库，方便不同数据库之间的结构迁移和同步；
+
+PS：该工具暂时是需要付费的；
