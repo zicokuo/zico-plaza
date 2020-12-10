@@ -112,19 +112,7 @@ module.exports = {
             options: {
                 uri:  `http://localhost:8000/___graphql`
             }
-        },
-        // {
-        //     resolve: `gatsby-plugin-apollo-shopify`,
-        //     options: {
-        //         shopName: `hhhtest001`,
-        //         accessToken: `cea03dbd64effd74062401daeb0312fa`,
-        //         // Optionally set the API version you want to use. For a list of available API versions,
-        //         // see: https://shopify.dev/concepts/about-apis/versioning/release-notes
-        //         // Defaults to unspecified/oldest stable
-        //         apiVersion: "2020-10",
-        //     },
-        // },
-        {
+        },        {
             resolve: `gatsby-source-shopify`,
             options: {
                 // The domain name of your Shopify shop.
@@ -159,24 +147,40 @@ module.exports = {
                     {
                         resolve: `gatsby-remark-responsive-iframe`,
                         options: {
-                            wrapperStyle: `margin-bottom: 1.0725rem`,
-                        },
+                            wrapperStyle: `margin-bottom: 1.0725rem`
+                        }
+                    },{
+                        resolve: `gatsby-remark-responsive-image`,
+                        options: {
+                            // It's important to specify the maxWidth (in pixels) of
+                            // the content container as this plugin uses this as the
+                            // base for generating different widths of each image.
+                            maxWidth: 590
+                        }
+                    }, {
+                        resolve: `gatsby-remark-liquid-tags`
                     },
-                    `gatsby-remark-prismjs`,
-                    `gatsby-remark-copy-linked-files`,
-                    `gatsby-remark-smartypants`,
+                    {resolve:`gatsby-remark-prismjs`},
+                    {resolve:`gatsby-remark-copy-linked-files`},
+                    {resolve:`gatsby-remark-smartypants`}
                 ],
             },
         },
-        `gatsby-transformer-sharp`,
-        `gatsby-plugin-sharp`,
         {
-            resolve: `gatsby-plugin-google-analytics`,
+            resolve: `gatsby-plugin-sharp`,
             options: {
-                //trackingId: `ADD YOUR TRACKING ID HERE`,
-            },
-        },
-        `gatsby-plugin-feed`,
+                plugins: [
+                    { resolve: `gatsby-transformer-sharp` },
+                    {
+                        resolve: `gatsby-plugin-google-analytics`,
+                        options: {
+                            //trackingId: `ADD YOUR TRACKING ID HERE`,
+                        }
+                    }
+                ]
+            }
+        }
+          ,{resolve:`gatsby-plugin-feed`,},
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
@@ -210,12 +214,6 @@ module.exports = {
                 // option to redirect to `/ko` when connecting `/`
                 redirect: false
             },
-        },
-        {
-            resolve: `gatsby-transformer-remark`,
-            options: {
-                plugins: [`gatsby-remark-liquid-tags`]
-            }
         }, {
             resolve: `@micalgenus/gatsby-plugin-github-avatar`,
             options: {
@@ -240,21 +238,7 @@ module.exports = {
             options: {
                 templatePath: `${__dirname}/src/pages/tag.tsx`
             }
-        }, {
-            //    markdown 文章预览图
-            resolve: `gatsby-transformer-remark`,
-            options: {
-                plugins: [{
-                    resolve: `gatsby-remark-responsive-image`,
-                    options: {
-                        // It's important to specify the maxWidth (in pixels) of
-                        // the content container as this plugin uses this as the
-                        // base for generating different widths of each image.
-                        maxWidth: 590
-                    }
-                }]
-            }
-        }, {
+        },  {
             //  gitalk 留言
             resolve: `gatsby-plugin-gitalk`,
             options: {
