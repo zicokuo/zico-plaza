@@ -1,8 +1,9 @@
 import React, { useState } from "react"
 import { Fade, Grid, IconButton } from "@material-ui/core"
 import { Search } from "@material-ui/icons"
-import { Highlight, Hits, InstantSearch, SearchBox } from "react-instantsearch-dom/dist/es/index.js"
+import { Highlight, Hits, InstantSearch, SearchBox } from "react-instantsearch-dom/dist/es/index"
 import algoliasearch from "algoliasearch/lite"
+import "./../../../static/algolia-min.css"
 
 // const useStyles = makeStyles(
 //   createStyles({
