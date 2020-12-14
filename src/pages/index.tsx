@@ -16,6 +16,8 @@ import {
   Container,
 } from "@material-ui/core"
 import { WelcomeWidget } from "../sections/home/welcomeWidget"
+import FallingStart from "@/src/ui/common/fallingStarBgWidget"
+import tw from "twin.macro"
 
 const useStyles = makeStyles({
   root: {
@@ -63,7 +65,8 @@ const BlogIndexPage = ({ location }: { location: Location }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title={intl.formatMessage({ id: `title` })} />
-      <Container>
+      <FallingStart/>
+      <Container css={[tw`z-10`]}>
         <WelcomeWidget />
         <Grid container spacing={2}>
           {posts

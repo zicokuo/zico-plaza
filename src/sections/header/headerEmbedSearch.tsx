@@ -1,18 +1,10 @@
 import React, { useState } from "react"
 import { Fade, Grid, IconButton } from "@material-ui/core"
 import { Search } from "@material-ui/icons"
+// @ts-ignore
 import { Highlight, Hits, InstantSearch, SearchBox } from "react-instantsearch-dom/dist/es/index"
 import algoliasearch from "algoliasearch/lite"
 import "./../../../static/algolia-min.css"
-
-// const useStyles = makeStyles(
-//   createStyles({
-//     root: {
-//       margin: 12,
-//       padding: 12,
-//       height: (props: any) => props?.isShow ? "auto" : "0"
-//     }
-//   }))
 
 const HeaderEmbedSearchComp = ({
                                  isShow
@@ -22,7 +14,7 @@ const HeaderEmbedSearchComp = ({
     searchClient = algoliasearch("GLO3877ISM", "69d1332950aec951e868bcca5efd4b1e")
 
   function Hit(props: any) {
-    console.log(props);
+    // console.log(props);
     return (
       <div>
         <div className="hit-name">

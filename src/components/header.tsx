@@ -74,7 +74,7 @@ const HeaderWidget = ({ title, theme }: { isRootPath: boolean, title: string, th
           <Grid classes={classes}  container alignItems={"center"}  wrap={"nowrap"}>
             <Grid item><HeaderLogo></HeaderLogo></Grid>
             <Grid item xs><SiteNavWidget ></SiteNavWidget></Grid>
-            <Grid item css={[tw`relative right-0`]}>
+            <Grid item style={{position:`relative`}}>
               <HeaderEmbedSearchComp isShow={false}></HeaderEmbedSearchComp>
             </Grid>
           </Grid>
