@@ -2,8 +2,8 @@
 // @ts-ignore
 import anime from "animejs/lib/anime.es.js"
 import React, { useEffect } from "react"
-import { makeStyles } from "@material-ui/styles"
 import { createStyles, Grid } from "@material-ui/core"
+import { makeStyles } from "@material-ui/styles"
 
 const userStyles = makeStyles(
   createStyles({

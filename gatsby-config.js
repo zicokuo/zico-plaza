@@ -97,6 +97,7 @@ module.exports = {
                 }
             }
         },
+        { resolve: `gatsby-plugin-image` },
         //    apollo client
         {
             resolve: `gatsby-theme-apollo`
@@ -160,27 +161,24 @@ module.exports = {
                     }, {
                         resolve: `gatsby-remark-liquid-tags`
                     },
-                    {resolve:`gatsby-remark-prismjs`},
-                    {resolve:`gatsby-remark-copy-linked-files`},
-                    {resolve:`gatsby-remark-smartypants`}
+                    { resolve: `gatsby-remark-prismjs` },
+                    { resolve: `gatsby-remark-copy-linked-files` },
+                    { resolve: `gatsby-remark-smartypants` }
                 ],
             },
+        },
+        { resolve: `gatsby-transformer-sharp` },
+        {
+            resolve: `gatsby-plugin-google-analytics`
         },
         {
             resolve: `gatsby-plugin-sharp`,
             options: {
-                plugins: [
-                    { resolve: `gatsby-transformer-sharp` },
-                    {
-                        resolve: `gatsby-plugin-google-analytics`,
-                        options: {
-                            //trackingId: `ADD YOUR TRACKING ID HERE`,
-                        }
-                    }
-                ]
+                defaultQuality: 50
+
             }
         }
-          ,{resolve:`gatsby-plugin-feed`,},
+        , { resolve: `gatsby-plugin-feed` },
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
@@ -190,7 +188,7 @@ module.exports = {
                 background_color: `#ffffff`,
                 theme_color: `#663399`,
                 display: `minimal-ui`,
-                icon: `content/assets/gatsby-icon.png`,
+                icon: `content/assets/gatsby-icon.png`
             },
         },
         `gatsby-plugin-react-helmet`,

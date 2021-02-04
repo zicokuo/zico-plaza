@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { Fade, Grid, IconButton } from "@material-ui/core"
+import React, { useRef, useState } from "react"
+import { ClickAwayListener, Fade, Grid, IconButton, Popover } from "@material-ui/core"
 import { Search } from "@material-ui/icons"
 // @ts-ignore
 import { Highlight, Hits, InstantSearch, SearchBox } from "react-instantsearch-dom/dist/es/index"
@@ -9,11 +9,12 @@ import "./../../../static/algolia-min.css"
 const HeaderEmbedSearchComp = ({
                                  isShow
                                }: { isShow: boolean }) => {
-  const [searchWord, setSearchWord] = useState(""),
+  const [showResult, setShowResult] = useState(false),
     [isShowComp, setShowComp] = useState(isShow),
+    popupRef = useRef(),
     searchClient = algoliasearch("GLO3877ISM", "69d1332950aec951e868bcca5efd4b1e")
 
-  function Hit(props: any) {
+  const Hit = (props: any) => {
     // console.log(props);
     return (
       <div>
@@ -28,6 +29,25 @@ const HeaderEmbedSearchComp = ({
     )
   }
 
+  const Hits = (props: any) => {
+    return (<ClickAwayListener onClickAway={_ => setShowResult(false)}>
+      <Popover
+        action={props.ref}
+        open={showResult}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center"
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center"
+        }}
+      >
+        <Hits hitComponent={Hit} />
+      </Popover>
+    </ClickAwayListener>)
+  }
+
   return (
     <Grid container direction={"row"} wrap={"nowrap"} alignItems={"center"} gap-1>
       <Grid item md={10}>
@@ -35,8 +55,15 @@ const HeaderEmbedSearchComp = ({
           <Grid>
             <InstantSearch indexName="Posts" searchClient={searchClient}>
               <div className="right-panel">
-                <SearchBox />
-                <Hits hitComponent={Hit} />
+                <SearchBox
+                  ref={popupRef}
+                  searchAsYouType={true}
+                  onSubmit={event => {
+                    event.preventDefault()
+                    setShowResult(true)
+                  }}
+                />
+                <Hits ref={popupRef}/>
               </div>
             </InstantSearch>
           </Grid>
