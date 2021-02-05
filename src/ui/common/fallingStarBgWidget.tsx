@@ -54,11 +54,18 @@ const userStyles = makeStyles(
   })
 )
 const document = getDocument()
+
 class StarrySky {
   state = {
     num: 100,
-    vw: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
-    vh: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+    vw: Math.max(
+      document.documentElement?.clientWidth,
+      window?.innerWidth || 1280
+    ),
+    vh: Math.max(
+      document.documentElement?.clientHeight,
+      window?.innerHeight || 900
+    )
   }
   starryNight = () => {
     anime({
