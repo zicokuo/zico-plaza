@@ -4,19 +4,19 @@ import { graphql, Link } from "gatsby"
 import Layout from "../layouts/layout"
 import SEO from "../components/seo"
 // @ts-ignore
-import Gitalk from "gatsby-plugin-gitalk/index.js"
-import '@suziwen/gitalk/dist/gitalk.css'
+// import Gitalk from "gatsby-plugin-gitalk"
+// import "@suziwen/gitalk/dist/gitalk.css"
 import { Divider } from "@material-ui/core"
 
-const BlogPostTemplate = ({ data, location }: { data: any, location: any }) => {
-  const post = data.markdownRemark
-  const siteTitle = data.site.siteMetadata?.title || `Title`
+const BlogPostTemplate = ({ data, location }: { data: any; location: any }) => {
+  const post = data?.markdownRemark
+  const siteTitle = data?.site?.siteMetadata?.title || `Title`
   const { previous, next } = data
-  const gitalkConfig = {
-    id: post.slug || post.id,
-    title: post.enTitle,
-    createIssueManually: true
-  }
+  // const gitalkConfig = {
+  //   id: post.slug || post.id,
+  //   title: post?.enTitle || post?.title,
+  //   createIssueManually: true,
+  // }
 
   return (
     <Layout location={location} title={siteTitle}>
@@ -48,7 +48,7 @@ const BlogPostTemplate = ({ data, location }: { data: any, location: any }) => {
             flexWrap: `wrap`,
             justifyContent: `space-between`,
             listStyle: `none`,
-            padding: 0
+            padding: 0,
           }}
         >
           <li>
@@ -68,7 +68,7 @@ const BlogPostTemplate = ({ data, location }: { data: any, location: any }) => {
         </ul>
       </nav>
       <Divider variant="middle" />
-      <Gitalk options={gitalkConfig} />
+      {/*<Gitalk options={gitalkConfig} />*/}
     </Layout>
   )
 }

@@ -1,19 +1,19 @@
 // Twinkling Night Sky by Sharna
 // @ts-ignore
 import anime from "animejs/lib/anime.es.js"
-import React, { useEffect } from "react"
+import React, { CSSProperties, useEffect } from "react"
 import { createStyles, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles"
 
 const userStyles = makeStyles(
   createStyles({
     root: {
-      zIndex:0,
+      zIndex: 0,
       position: `fixed`,
       width: `99vw`,
       height: `30vh`,
       top: 0,
-      left: 0
+      left: 0,
     },
     sky: {
       width: `100vw`,
@@ -21,7 +21,7 @@ const userStyles = makeStyles(
       position: `fixed`,
       overflow: `hidden`,
       margin: `0`,
-      padding: `0`
+      padding: `0`,
     },
 
     shootingstars: {
@@ -34,7 +34,7 @@ const userStyles = makeStyles(
       transform: `
       translatex(calc(50vw - 50%)) 
       translatey(calc(50vh - 50%)) 
-      rotate(120deg)`
+      rotate(120deg)`,
     },
 
     wish: {
@@ -48,17 +48,19 @@ const userStyles = makeStyles(
       position: `absolute`,
       background: `linear-gradient(-45deg, grey, rgba(0, 0, 255, 0))`,
       filter: `drop-shadow(0 0 6px grey)`,
-      overflow: `hidden`
-    }
+      overflow: `hidden`,
+    },
   })
 )
 
-
 class StarrySky {
   state = {
-    num: 60,
+    num: 100,
     vw: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
-    vh: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+    vh: Math.max(
+      document.documentElement.clientHeight,
+      window.innerHeight || 0
+    ),
   }
   starryNight = () => {
     anime({
@@ -66,16 +68,16 @@ class StarrySky {
       opacity: [
         {
           duration: 700,
-          value: "0"
+          value: "0",
         },
         {
           duration: 700,
-          value: "1"
-        }
+          value: "1",
+        },
       ],
       easing: "linear",
       loop: true,
-      delay: (el: any, i: number) => 50 * i
+      delay: (el: any, i: number) => 50 * i,
     })
   }
   shootingStars = () => {
@@ -87,18 +89,18 @@ class StarrySky {
       opacity: [
         {
           duration: 700,
-          value: "1"
-        }
+          value: "1",
+        },
       ],
       width: [
         {
-          value: "150px"
+          value: "150px",
         },
         {
-          value: "0px"
-        }
+          value: "0px",
+        },
       ],
-      translateX: 350
+      translateX: 350,
     })
   }
   randomRadius = () => {
@@ -110,63 +112,61 @@ class StarrySky {
   getRandomY = () => {
     return Math.floor(Math.random() * Math.floor(this.state.vh)).toString()
   }
-
 }
 
 const FallingStart = () => {
-  let starInstance = new StarrySky()
-    , classes = userStyles()
-    , { num } = starInstance.state
-    , expCss = {
-    wish: {
-      height: `2px`,
-      top: `300px`,
-      width: `100px`,
-      margin: `0`,
-      opacity: `0`,
-      padding: `0`,
-      backgroundColor: `grey`,
-      position: `absolute`,
-      background: `linear-gradient(-45deg, grey, rgba(0, 0, 255, 0))`,
-      filter: `drop-shadow(0 0 6px grey)`,
-      overflow: `hidden`
+  let starInstance = new StarrySky(),
+    classes = userStyles(),
+    { num } = starInstance.state,
+    expCss = {
+      wish: {
+        height: `2px`,
+        top: `300px`,
+        width: `100px`,
+        margin: `0`,
+        opacity: `0`,
+        padding: `0`,
+        backgroundColor: `grey`,
+        position: `absolute`,
+        background: `linear-gradient(-45deg, grey, rgba(0, 0, 255, 0))`,
+        filter: `drop-shadow(0 0 6px grey)`,
+        overflow: `hidden`,
+      },
     }
-  }
 
   useEffect(() => {
     starInstance.starryNight()
     starInstance.shootingStars()
   })
 
-
   return (
     <Grid id="fallingStar" className={classes.root}>
-      <svg id="sky" className={classes.sky}>
-        {[...Array(num)].map((x: number, y: number) => (
-          <circle
-            cx={starInstance.getRandomX()}
-            cy={starInstance.getRandomY()}
-            r={starInstance.randomRadius()}
-            stroke="none"
-            strokeWidth="0"
-            fill="white"
-            key={y}
-            className="star"
-          />
-        ))}
-      </svg>
+      {/*<svg id="sky" className={classes.sky}>*/}
+      {/*  {[...Array(num)].map((x: number, y: number) => (*/}
+      {/*    <circle*/}
+      {/*      cx={starInstance.getRandomX()}*/}
+      {/*      cy={starInstance.getRandomY()}*/}
+      {/*      r={starInstance.randomRadius()}*/}
+      {/*      strokeWidth="50"*/}
+      {/*      fill="black"*/}
+      {/*      key={y}*/}
+      {/*      className="star"*/}
+      {/*      strokeLinecap={"square"}*/}
+      {/*    />*/}
+      {/*  ))}*/}
+      {/*</svg>*/}
       <div id="shootingstars" className={classes.shootingstars}>
-        {[...Array(60)].map((x: number, y: number) => (
+        {[...Array(300)].map((x: number, y: number) => (
           <div
             key={y}
-            class={'wish'}
-            // classes={{root:expCss.wish}}
-            style={{
-              ...expCss.wish,
-              left: `${starInstance.getRandomY()}px`,
-              top: `${starInstance.getRandomX()}px`,
-
-            }}
+            className={"wish"}
+            style={
+              {
+                ...expCss.wish,
+                left: `${starInstance.getRandomY()}px`,
+                top: `${starInstance.getRandomX()}px`,
+              } as CSSProperties
+            }
           />
         ))}
       </div>
