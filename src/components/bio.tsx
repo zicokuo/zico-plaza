@@ -14,7 +14,7 @@ import tw from "twin.macro"
 
 import Avatar from "@micalgenus/gatsby-plugin-github-avatar"
 
-const Bio = () => {
+export default (): JSX.Element => {
   const data = useStaticQuery(graphql`
     query BioQuery {
       avatar: file(absolutePath: { regex: "/profile-pic.jpg/" }) {
@@ -55,4 +55,4 @@ const Bio = () => {
   )
 }
 
-export default Bio
+

@@ -9,9 +9,9 @@ import { graphql, useStaticQuery } from "gatsby"
 import { themeConfig } from "@/src/theme/base.theme"
 
 const Layout = ({
-                  location,
-                  children
-                }: {
+  location,
+  children,
+}: {
   location: Location
   title: String
   children: any
@@ -28,11 +28,15 @@ const Layout = ({
 
   return (
     <>
-      <HeaderWidget title={siteTitle?.toString() ?? ""} theme={theme} isRootPath={isRootPath} />
+      <HeaderWidget
+        title={siteTitle?.toString() ?? ""}
+        theme={theme}
+        isRootPath={isRootPath}
+      />
+      <GlobalStyles />
       <div className="global-wrapper" data-is-root-path={isRootPath}>
         <main>{children}</main>
       </div>
-      <GlobalStyles />
       <FooterWidget />
     </>
   )

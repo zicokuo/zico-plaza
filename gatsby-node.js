@@ -155,7 +155,7 @@ exports.onCreateNode = ({
     const thumbBgColor = [
       '#B0E0E6', '#4169E1', '#FF6347'
     ];
-    //  检查封面文件夹,存在则清空*.png,不存在则创建
+
     const generatedCoverSlug = createImage({
       title: enTitle,
       border: false,

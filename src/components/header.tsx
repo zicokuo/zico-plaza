@@ -6,10 +6,10 @@ import { FormattedMessage, Link } from "gatsby-plugin-intl"
 import { AppBar, Avatar, Grid, IconButton, Toolbar, Typography, useScrollTrigger } from "@material-ui/core"
 import SiteNavWidget from "./siteNav"
 import { MobileOnly, PcOnly } from "./commonStyledComponents"
-import { Search, Share } from "@material-ui/icons"
+import { Share } from "@material-ui/icons"
 import { graphql, useStaticQuery } from "gatsby"
 import { createStyles, makeStyles } from "@material-ui/styles"
-import { HeaderEmbedSearchComp } from "@/src/sections/header/headerEmbedSearch"
+import  HeaderEmbedSearchComp  from "@/src/sections/header/headerEmbedSearch"
 
 interface Props {
   /**
@@ -67,8 +67,6 @@ const HeaderWidget = ({ title, theme }: { isRootPath: boolean, title: string, th
     </Link>
   )
 
-
-
   return (
     <ElevationScrollWrapper  {...props}>
       <AppBar className={classes.AppBar} position={"sticky"} color={"inherit"}>
@@ -76,7 +74,7 @@ const HeaderWidget = ({ title, theme }: { isRootPath: boolean, title: string, th
           <Grid classes={classes}  container alignItems={"center"}  wrap={"nowrap"}>
             <Grid item><HeaderLogo></HeaderLogo></Grid>
             <Grid item xs><SiteNavWidget ></SiteNavWidget></Grid>
-            <Grid item css={[tw`relative right-0`]}>
+            <Grid item style={{position:`relative`}}>
               <HeaderEmbedSearchComp isShow={false}></HeaderEmbedSearchComp>
             </Grid>
           </Grid>

@@ -16,12 +16,15 @@ import {
   Container,
 } from "@material-ui/core"
 import { WelcomeWidget } from "../sections/home/welcomeWidget"
+import FallingStart from "@/src/ui/common/fallingStarBgWidget"
+import tw from "twin.macro"
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
+    background: "transparent",
   },
   postCard: {
+    height: "100%",
     margin: 2,
   },
   postCardChip: {
@@ -63,9 +66,10 @@ const BlogIndexPage = ({ location }: { location: Location }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title={intl.formatMessage({ id: `title` })} />
-      <Container>
+      <FallingStart />
+      <Container className={classes.root} css={[tw`z-10`]}>
         <WelcomeWidget />
-        <Grid container spacing={2}>
+        <Grid container spacing={4} justify={"stretch"}>
           {posts
             .filter(post => post.frontmatter?.visitable !== 0)
             .map(function ({ id, frontmatter, fields }, key) {
@@ -79,11 +83,13 @@ const BlogIndexPage = ({ location }: { location: Location }) => {
                   xs={12}
                   style={{
                     height: "auto",
-                    paddingBottom: "1em",
-                    backgroundColor: "#eee",
                   }}
                 >
-                  <Card key={`postCard-${id}`} className={classes.postCard}>
+                  <Card
+                    key={`postCard-${id}`}
+                    className={classes.postCard}
+                    elevation={3}
+                  >
                     <CardActionArea href={fields.slug}>
                       <CardMedia
                         className={
