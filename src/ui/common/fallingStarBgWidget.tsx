@@ -13,7 +13,7 @@ const userStyles = makeStyles(
       width: `99vw`,
       height: `30vh`,
       top: 0,
-      left: 0,
+      left: 0
     },
     sky: {
       width: `100vw`,
@@ -21,7 +21,7 @@ const userStyles = makeStyles(
       position: `fixed`,
       overflow: `hidden`,
       margin: `0`,
-      padding: `0`,
+      padding: `0`
     },
 
     shootingstars: {
@@ -34,7 +34,7 @@ const userStyles = makeStyles(
       transform: `
       translatex(calc(50vw - 50%)) 
       translatey(calc(50vh - 50%)) 
-      rotate(120deg)`,
+      rotate(120deg)`
     },
 
     wish: {
@@ -48,19 +48,18 @@ const userStyles = makeStyles(
       position: `absolute`,
       background: `linear-gradient(-45deg, grey, rgba(0, 0, 255, 0))`,
       filter: `drop-shadow(0 0 6px grey)`,
-      overflow: `hidden`,
-    },
+      overflow: `hidden`
+    }
   })
 )
+
+const document = window.document
 
 class StarrySky {
   state = {
     num: 100,
     vw: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
-    vh: Math.max(
-      document.documentElement.clientHeight,
-      window.innerHeight || 0
-    ),
+    vh: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
   }
   starryNight = () => {
     anime({
@@ -68,16 +67,16 @@ class StarrySky {
       opacity: [
         {
           duration: 700,
-          value: "0",
+          value: "0"
         },
         {
           duration: 700,
-          value: "1",
-        },
+          value: "1"
+        }
       ],
       easing: "linear",
       loop: true,
-      delay: (el: any, i: number) => 50 * i,
+      delay: (el: any, i: number) => 50 * i
     })
   }
   shootingStars = () => {
@@ -89,18 +88,18 @@ class StarrySky {
       opacity: [
         {
           duration: 700,
-          value: "1",
-        },
+          value: "1"
+        }
       ],
       width: [
         {
-          value: "150px",
+          value: "150px"
         },
         {
-          value: "0px",
-        },
+          value: "0px"
+        }
       ],
-      translateX: 350,
+      translateX: 350
     })
   }
   randomRadius = () => {
@@ -130,8 +129,8 @@ const FallingStart = () => {
         position: `absolute`,
         background: `linear-gradient(-45deg, grey, rgba(0, 0, 255, 0))`,
         filter: `drop-shadow(0 0 6px grey)`,
-        overflow: `hidden`,
-      },
+        overflow: `hidden`
+      }
     }
 
   useEffect(() => {
@@ -164,7 +163,7 @@ const FallingStart = () => {
               {
                 ...expCss.wish,
                 left: `${starInstance.getRandomY()}px`,
-                top: `${starInstance.getRandomX()}px`,
+                top: `${starInstance.getRandomX()}px`
               } as CSSProperties
             }
           />
