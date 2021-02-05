@@ -4,6 +4,7 @@ import anime from "animejs/lib/anime.es.js"
 import React, { CSSProperties, useEffect } from "react"
 import { createStyles, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/styles"
+import { getDocument } from "ssr-window"
 
 const userStyles = makeStyles(
   createStyles({
@@ -52,14 +53,19 @@ const userStyles = makeStyles(
     }
   })
 )
-
-const document = window.document
+const document = getDocument()
 
 class StarrySky {
   state = {
     num: 100,
-    vw: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
-    vh: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+    vw: Math.max(
+      document.documentElement?.clientWidth,
+      window?.innerWidth || 1280
+    ),
+    vh: Math.max(
+      document.documentElement?.clientHeight,
+      window?.innerHeight || 900
+    )
   }
   starryNight = () => {
     anime({
