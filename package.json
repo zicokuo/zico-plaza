@@ -76,6 +76,7 @@
         "react-helmet": "^6.1.0",
         "react-instantsearch": "^6.8.2",
         "react-instantsearch-dom": "^6.8.2",
+        "ssr-window": "^3.0.0",
         "subscriptions-transport-ws": "^0.9.18",
         "tailwind.macro": "^0.5.10",
         "tailwindcss": "^1.9.6",
