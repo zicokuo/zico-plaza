@@ -1,35 +1,24 @@
-const fs = require(`fs`);
+const fs = require(`fs`)
 const path = require(`path`)
 const lodash = require(`lodash`)
 const createImage = require(`gatsby-plugin-blog-cover`)
-const {
-  createFilePath
-} = require(`gatsby-source-filesystem`)
+const { createFilePath } = require(`gatsby-source-filesystem`)
 
-exports.onCreateWebpackConfig = ({
-  stage,
-  actions
-}) => {
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
-        "@/src": path.resolve(__dirname, './src'),
-        "@/public": path.resolve(__dirname, './public'),
-        "@/content": path.resolve(__dirname, './content'),
-        "@/intl": path.resolve(__dirname, './intl'),
+        "@/src": path.resolve(__dirname, "./src"),
+        "@/public": path.resolve(__dirname, "./public"),
+        "@/content": path.resolve(__dirname, "./content"),
+        "@/intl": path.resolve(__dirname, "./intl")
       }
     }
   })
-};
+}
 
-exports.createPages = async ({
-  graphql,
-  actions,
-  reporter
-}) => {
-  const {
-    createPage
-  } = actions
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const { createPage } = actions
 
   // Define a template for blog post
   const blogPost = path.resolve(`./src/templates/blog-post.tsx`)
@@ -78,62 +67,15 @@ exports.createPages = async ({
         context: {
           id: post.id,
           previousPostId,
-          nextPostId,
-        },
+          nextPostId
+        }
       })
     })
   }
-
-  const shopifyResult = await graphql(`
-  query {
-    allShopifyProduct(sort: { fields: [title] }) {
-      edges {
-        node {
-          title
-          images {
-            originalSrc
-          }
-          shopifyId
-          handle
-          description
-          availableForSale
-          priceRange {
-            maxVariantPrice {
-              amount
-            }
-            minVariantPrice {
-              amount
-            }
-          }
-        }
-      }
-    }
-  }
-`)
-  // Iterate over all products and create a new page using a template
-  // The product "handle" is generated automatically by Shopify
-  shopifyResult.data.allShopifyProduct.edges.forEach(({
-    node
-  }) => {
-    createPage({
-      path: `/product/${node.handle}`,
-      component: path.resolve(`./src/templates/shop-product.tsx`),
-      context: {
-        product: node,
-      },
-    })
-  })
-
 }
 
-exports.onCreateNode = ({
-  node,
-  actions,
-  getNode
-}) => {
-  const {
-    createNodeField
-  } = actions
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  const { createNodeField } = actions
 
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({
@@ -144,41 +86,33 @@ exports.onCreateNode = ({
     createNodeField({
       name: `slug`,
       node,
-      value,
+      value
     })
 
     //  封面
-    const {
-      title,
-      enTitle
-    } = node.frontmatter;
-    const thumbBgColor = [
-      '#B0E0E6', '#4169E1', '#FF6347'
-    ];
+    const { title, enTitle } = node.frontmatter
+    const thumbBgColor = ["#B0E0E6", "#4169E1", "#FF6347"]
 
     const generatedCoverSlug = createImage({
       title: enTitle,
       border: false,
-      domain: 'zico.plaza',
-      imgPath: './src/thumbs',
-      bgColor: lodash.toLower(thumbBgColor[lodash.random(0, thumbBgColor.length, false)])
+      domain: "zico.plaza",
+      imgPath: "./src/thumbs",
+      bgColor: lodash.toLower(
+        thumbBgColor[lodash.random(0, thumbBgColor.length, false)]
+      )
       // domain: "https://dillionmegida.com"
     })
     createNodeField({
       node,
-      name: 'generatedCoverSlug',
+      name: "generatedCoverSlug",
       value: generatedCoverSlug
     })
-
   }
 }
 
-exports.createSchemaCustomization = ({
-  actions
-}) => {
-  const {
-    createTypes
-  } = actions
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions
 
   // Explicitly define the siteMetadata {} object
   // This way those will always be defined even if removed from gatsby-config.js
@@ -227,5 +161,6 @@ exports.createSchemaCustomization = ({
       tags: [String],
       generatedCoverSlug: String
     }
-  `)
+  `
+  )
 }
