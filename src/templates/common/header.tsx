@@ -9,6 +9,7 @@ import HeaderEmbedSearchComp from "@/src/templates/header/header-embed-search"
 import { ThemeConfigFace } from "@/src/theme/base.theme"
 import { sqSiteInfoData } from "@/src/graphql/site-info"
 import LangSwitchWidget from "@/src/templates/header/lang-switch"
+import { BuyMeCoffeeWidget } from "@/src/templates/header/buy-me-coffee"
 
 interface Props {
   /**
@@ -28,31 +29,31 @@ const ElevationScrollWrapper = (props: Props) => {
   const scrollTrigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
-    target: window ? window() : undefined,
+    target: window ? window() : undefined
   })
 
   return React.cloneElement(children, {
-    elevation: scrollTrigger ? 4 : 0,
+    elevation: scrollTrigger ? 4 : 0
   })
 }
 const useStyles = makeStyles((theme: any) =>
   createStyles({
     AppBar: {
-      height: 72,
+      height: 72
     },
     root: {
       position: "relative",
       maxWidth: "1200px",
       margin: "auto",
       justifyContent: "start",
-      backGround: theme?.colors?.background,
+      backGround: theme?.colors?.background
     },
     item: {
-      margin: 6,
+      margin: 6
     },
     HeaderLogo: {
-      backGround: theme?.colors?.cyan["500"],
-    },
+      backGround: theme?.colors?.cyan["500"]
+    }
   })
 )
 
@@ -66,7 +67,7 @@ const useStyles = makeStyles((theme: any) =>
 const HeaderWidget = (
   {
     title,
-    theme,
+    theme
   }: { isRootPath: boolean; title: string; theme: ThemeConfigFace },
   props: Props
 ) => {
@@ -96,11 +97,9 @@ const HeaderWidget = (
           <Grid item xs>
             <SiteNavWidget />
           </Grid>
+
           <Grid item style={{ position: `relative` }}>
             <HeaderEmbedSearchComp isShow={false} />
-          </Grid>
-          <Grid item>
-            <LangSwitchWidget />
           </Grid>
         </Grid>
       </AppBar>

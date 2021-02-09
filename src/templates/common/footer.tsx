@@ -2,7 +2,7 @@
 
 import React from "react"
 import { BioWidget } from "./bio"
-import { Card, CardContent, Grid } from "@material-ui/core"
+import { Grid } from "@material-ui/core"
 
 const FooterWidget = () => {
   return (
