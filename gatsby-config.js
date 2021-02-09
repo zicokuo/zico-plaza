@@ -78,13 +78,6 @@ module.exports = {
     {
       resolve: `gatsby-plugin-postcss`
     },
-    {
-      resolve: `babel-plugin-tailwind-components`
-    },
-    //  Tailwind css
-    {
-      resolve: `gatsby-plugin-tailwindcss`
-    },
     //  Material UI
     {
       resolve: `gatsby-plugin-material-ui`,
@@ -275,6 +268,14 @@ module.exports = {
         matchFields: ["slug", "date", "title", "modified"], // Array<String> default: ['modified']
         concurrentQueries: true, // default: true
         skipIndexing: true // default: false, useful for e.g. preview deploys or local development
+      }
+    },
+    {
+      resolve: `gatsby-plugin-hotjar`,
+      options: {
+        includeInDevelopment: true, // optional parameter to include script in development
+        id: 2239420,
+        sv: 6
       }
     }
 

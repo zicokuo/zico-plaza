@@ -2,10 +2,10 @@ import React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../layouts/layout"
-import SEO from "../components/seo"
-import PostsList from "../components/postsList"
+import SEO from "../templates/common/seo"
+import PostsList from "../templates/common/postsList"
 //  todo
-const CategoryTemplate = props => {
+const CategoryPage = (props: any) => {
   const { category } = props.pageContext
   return (
     <Layout location={props.location} title={`Posts in category "${category}"`}>
@@ -46,4 +46,4 @@ export const pageQuery = graphql`
   }
 `
 
-export default CategoryTemplate
+export default CategoryPage

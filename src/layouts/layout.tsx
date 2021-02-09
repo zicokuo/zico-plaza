@@ -1,9 +1,8 @@
 //  页面布局
 // @ts-ignore
 import React from "react"
-import { GlobalStyles } from "twin.macro"
-import HeaderWidget from "../components/header"
-import FooterWidget from "../components/footer"
+import HeaderWidget from "../templates/common/header"
+import FooterWidget from "../templates/common/footer"
 import { useIntl } from "gatsby-plugin-intl"
 import { graphql, useStaticQuery } from "gatsby"
 import { themeConfig } from "@/src/theme/base.theme"
@@ -33,7 +32,6 @@ const Layout = ({
         theme={theme}
         isRootPath={isRootPath}
       />
-      <GlobalStyles />
       <div className="global-wrapper" data-is-root-path={isRootPath}>
         <main>{children}</main>
       </div>

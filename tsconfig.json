@@ -1,7 +1,5 @@
 {
-  "files": ["twin.d.ts"],
   // or
-  // "include": ["twin.d.ts"],
   "compilerOptions": {
     "target": "esnext", // 编译生成的目标 es 版本,可以根据需要设置
     "module": "esnext", // 编译生成的目标模块系统

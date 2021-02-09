@@ -2,7 +2,7 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 
 import Layout from "../layouts/layout"
-import SEO from "../components/seo"
+import SEO from "./common/seo"
 // @ts-ignore
 // import Gitalk from "gatsby-plugin-gitalk"
 // import "@suziwen/gitalk/dist/gitalk.css"

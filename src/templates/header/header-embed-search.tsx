@@ -18,10 +18,14 @@ import {
   Hits,
   InstantSearch,
   SearchBox,
-} from "react-instantsearch-dom/dist/es/index"
+} from "react-instantsearch-dom"
 import algoliasearch from "algoliasearch/lite"
 import { makeStyles } from "@material-ui/styles"
-import { graphql, Link, useStaticQuery } from "gatsby"
+import { Link } from "gatsby"
+
+/**
+ * ## Algolia search item interface
+ */
 export interface AlgoliaSearchHit {
   frontmatter: any
   objectID: string
@@ -40,7 +44,7 @@ const useStyile = makeStyles(
 )
 
 /**
- * 头部aligo搜索结果弹出界面
+ * ## 头部aligo搜索结果弹出界面
  * @param hits
  */
 const customHits = ({
@@ -72,7 +76,7 @@ const customHits = ({
 }
 
 /**
- * 头部嵌入式搜索组件
+ * ## 头部嵌入式搜索组件
  * @param isShow
  * @constructor
  */
@@ -100,7 +104,7 @@ const HeaderEmbedSearchComp = ({ isShow }: { isShow: boolean }) => {
             {/*搜索框*/}
             <SearchBox
               searchAsYouType={true}
-              onSubmit={(event: Event) => {
+              onSubmit={event => {
                 event.preventDefault()
                 setShowResult(true)
               }}

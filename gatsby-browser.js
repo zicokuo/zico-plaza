@@ -7,7 +7,6 @@ import "./src/normalize.css"
 import "./src/style.css"
 import "./static/maize.css"
 import "./static/algolia-min.css"
-// import "prismjs/themes/prism.css"
 
 const preferDefault = m => (m && m.default) || m
 export const wrapRootElement = preferDefault()
