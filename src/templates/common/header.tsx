@@ -3,11 +3,12 @@
 import React, { useState } from "react"
 import { FormattedMessage, Link } from "gatsby-plugin-intl"
 import { AppBar, Avatar, Grid, useScrollTrigger } from "@material-ui/core"
-import { graphql, useStaticQuery } from "gatsby"
 import { createStyles, makeStyles } from "@material-ui/styles"
 import SiteNavWidget from "./site-nav"
 import HeaderEmbedSearchComp from "@/src/templates/header/header-embed-search"
 import { ThemeConfigFace } from "@/src/theme/base.theme"
+import { sqSiteInfoData } from "@/src/graphql/site-info"
+import LangSwitchWidget from "@/src/templates/header/lang-switch"
 
 interface Props {
   /**
@@ -46,6 +47,9 @@ const useStyles = makeStyles((theme: any) =>
       justifyContent: "start",
       backGround: theme?.colors?.background,
     },
+    item: {
+      margin: 6,
+    },
     HeaderLogo: {
       backGround: theme?.colors?.cyan["500"],
     },
@@ -66,14 +70,18 @@ const HeaderWidget = (
   }: { isRootPath: boolean; title: string; theme: ThemeConfigFace },
   props: Props
 ) => {
-  let { site } = useStaticQuery(pageQuery),
+  let { site } = sqSiteInfoData(),
     pageTitle = site?.siteMetadata?.title || props?.title || "",
     classes = useStyles(theme),
     HeaderLogo = () => (
       <Link className="header-link-home" to="/">
-        <Grid container alignItems={"center"}>
-          <Avatar alt="avatar" src="/logo.png" />
-          <FormattedMessage id={`${pageTitle || title}`} />
+        <Grid classes={classes} container alignItems={"center"}>
+          <Grid item>
+            <Avatar alt="avatar" src="/logo.png" />
+          </Grid>
+          <Grid item>
+            <FormattedMessage id={`${pageTitle || title}`} />
+          </Grid>
         </Grid>
       </Link>
     )
@@ -91,6 +99,9 @@ const HeaderWidget = (
           <Grid item style={{ position: `relative` }}>
             <HeaderEmbedSearchComp isShow={false} />
           </Grid>
+          <Grid item>
+            <LangSwitchWidget />
+          </Grid>
         </Grid>
       </AppBar>
     </ElevationScrollWrapper>
@@ -98,24 +109,3 @@ const HeaderWidget = (
 }
 
 export default HeaderWidget
-
-export const pageQuery = graphql`
-  query headerQuery {
-    site(siteMetadata: {}) {
-      siteMetadata {
-        title
-        description
-        siteNav {
-          path
-          label
-          type
-        }
-      }
-    }
-    intl: sitePlugin(name: { eq: "gatsby-plugin-intl" }) {
-      options: pluginOptions {
-        lang: languages
-      }
-    }
-  }
-`

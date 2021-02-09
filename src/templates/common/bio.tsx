@@ -11,7 +11,7 @@ import { graphql, useStaticQuery } from "gatsby"
 import { FormattedMessage } from "gatsby-plugin-intl"
 
 import Avatar from "@micalgenus/gatsby-plugin-github-avatar"
-import { Grid } from "@material-ui/core"
+import { Card, Grid } from "@material-ui/core"
 import { createStyles, makeStyles } from "@material-ui/styles"
 
 export const BioWidget = (): JSX.Element => {

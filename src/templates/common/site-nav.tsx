@@ -14,6 +14,9 @@ const SiteNavWidget = ({}) => {
         drawer: {
           width: drawerWidth + "vw",
         },
+        navItem: {
+          margin: 4,
+        },
       })
     )(),
     siteNav = site?.siteMetadata?.siteNav ?? []
@@ -23,7 +26,7 @@ const SiteNavWidget = ({}) => {
       {siteNav.map(
         (nav: { path: string; label: React.ReactNode }, idx: number) => {
           return (
-            <Grid key={`${idx}-${nav?.path}`}>
+            <Grid key={`${idx}-${nav?.path}`} className={classes.navItem}>
               <Link
                 key={`${idx}-${nav?.path}-link`}
                 to={`${nav?.path?.match("^/") ? nav : `/${nav.path}`}`}

@@ -21,7 +21,7 @@ import {
   postsQuery,
   PostsQueryNode,
   PostsQueryPostNode,
-} from "@/src/service/posts"
+} from "@/src/graphql/posts"
 
 const useStyles = makeStyles({
   root: {

@@ -3,7 +3,7 @@ import React from "react"
 // Components
 import lodash from "lodash"
 import { graphql, useStaticQuery } from "gatsby"
-import { useAllTags } from "../hooks/tags"
+import { useAllTags } from "../graphql/tags"
 import Layout from "../layouts/layout"
 import { Link, useIntl } from "gatsby-plugin-intl"
 import SEO from "../templates/common/seo"
