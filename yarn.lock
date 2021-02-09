@@ -7648,6 +7648,13 @@ gatsby-plugin-google-analytics@^2.3.18:
     "@babel/runtime" "^7.12.5"
     minimatch "3.0.4"
 
+gatsby-plugin-hotjar@^1.1.1:
+  version "1.1.1"
+  resolved "https://r.cnpmjs.org/gatsby-plugin-hotjar/download/gatsby-plugin-hotjar-1.1.1.tgz#b910209c80fb2a0df9e0dc1b52de7270d9831b31"
+  integrity sha1-uRAgnID7Kg354NwbUt5ycNmDGzE=
+  dependencies:
+    babel-runtime "^6.26.0"
+
 gatsby-plugin-image@^0.7.0:
   version "0.7.0"
   resolved "https://registry.npmjs.org/gatsby-plugin-image/-/gatsby-plugin-image-0.7.0.tgz#1e2aea812ee1d11e41a0bf3b65f14321f38a83e2"
@@ -16823,8 +16830,10 @@ watchpack@^1.7.4:
   resolved "https://registry.npmjs.org/watchpack/-/watchpack-1.7.5.tgz#1267e6c55e0b9b5be44c2023aed5437a2c26c453"
   integrity sha512-9P3MWk6SrKjHsGkLT2KHXdQ/9SNkyoJbabxnKOoJepsvJjJG8uYTR3yTPxPQvNDI3w4Nz1xnE0TLHK4RIVe/MQ==
   dependencies:
+    chokidar "^3.4.1"
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
+    watchpack-chokidar2 "^2.0.1"
   optionalDependencies:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"

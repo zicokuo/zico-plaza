@@ -8,7 +8,7 @@
  */
 
 require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
+  path: `.env.${process.env.NODE_ENV}`
 })
 
 // gatsby-config.js
@@ -44,8 +44,8 @@ const queries = [
     settings: {
       // optional, any index settings
     },
-    matchFields: ["slug", "date", "title", "modified"], // Array<String> overrides main match fields, optional
-  },
+    matchFields: ["slug", "date", "title", "modified"] // Array<String> overrides main match fields, optional
+  }
 ]
 
 module.exports = {
@@ -53,56 +53,56 @@ module.exports = {
     title: `Zico Plaza`,
     author: {
       name: `Zico`,
-      summary: `fullstack develop engineer`,
+      summary: `fullstack develop engineer`
     },
     description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://gatsby-starter-blog-demo.netlify.app/`,
     social: {
-      twitter: ``,
+      twitter: ``
     },
     siteNav: [
       {
         path: "category",
         label: "Category",
-        type: "category",
+        type: "category"
       },
       {
         path: "tags",
         label: "Tags",
-        type: "tag",
-      },
-    ],
+        type: "tag"
+      }
+    ]
   },
   plugins: [
     //  PostCSS 处理
     {
-      resolve: `gatsby-plugin-postcss`,
+      resolve: `gatsby-plugin-postcss`
     },
     //  Material UI
     {
       resolve: `gatsby-plugin-material-ui`,
       options: {
         stylesProvider: {
-          injectFirst: true,
-        },
-      },
+          injectFirst: true
+        }
+      }
     },
     { resolve: `gatsby-plugin-image` },
     //    apollo client
     {
-      resolve: `gatsby-theme-apollo`,
+      resolve: `gatsby-theme-apollo`
     },
     {
       resolve: `gatsby-plugin-dynamic-routes`,
       options: {
-        routeFilePath: `src/routes.ts`,
-      },
+        routeFilePath: `src/routes.ts`
+      }
     },
     {
       resolve: "gatsby-plugin-apollo",
       options: {
-        uri: `http://localhost:8000/___graphql`,
-      },
+        uri: `http://localhost:8000/___graphql`
+      }
     },
     // {
     //   resolve: `gatsby-source-shopify`,
@@ -117,15 +117,15 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/blog`,
-        name: `blog`,
-      },
+        name: `blog`
+      }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/content/assets`,
-        name: `assets`,
-      },
+        name: `assets`
+      }
     },
     {
       resolve: `gatsby-transformer-remark`,
@@ -134,14 +134,14 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 630,
-            },
+              maxWidth: 630
+            }
           },
           {
             resolve: `gatsby-remark-responsive-iframe`,
             options: {
-              wrapperStyle: `margin-bottom: 1.0725rem`,
-            },
+              wrapperStyle: `margin-bottom: 1.0725rem`
+            }
           },
           {
             resolve: `gatsby-remark-responsive-image`,
@@ -149,27 +149,27 @@ module.exports = {
               // It's important to specify the maxWidth (in pixels) of
               // the content container as this plugin uses this as the
               // base for generating different widths of each image.
-              maxWidth: 590,
-            },
+              maxWidth: 590
+            }
           },
           {
-            resolve: `gatsby-remark-liquid-tags`,
+            resolve: `gatsby-remark-liquid-tags`
           },
           { resolve: `gatsby-remark-prismjs` },
           { resolve: `gatsby-remark-copy-linked-files` },
-          { resolve: `gatsby-remark-smartypants` },
-        ],
-      },
+          { resolve: `gatsby-remark-smartypants` }
+        ]
+      }
     },
     { resolve: `gatsby-transformer-sharp` },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-google-analytics`
     },
     {
       resolve: `gatsby-plugin-sharp`,
       options: {
-        defaultQuality: 50,
-      },
+        defaultQuality: 50
+      }
     },
     { resolve: `gatsby-plugin-feed` },
     {
@@ -181,8 +181,8 @@ module.exports = {
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `content/assets/gatsby-icon.png`,
-      },
+        icon: `content/assets/gatsby-icon.png`
+      }
     },
     `gatsby-plugin-react-helmet`,
     {
@@ -190,8 +190,8 @@ module.exports = {
       options: {
         isTSX: true, // defaults to false
         jsxPragma: `jsx`, // defaults to "React"
-        allExtensions: true, // defaults to false
-      },
+        allExtensions: true // defaults to false
+      }
     },
     {
       resolve: `gatsby-plugin-intl`,
@@ -203,36 +203,36 @@ module.exports = {
         // language file path
         defaultLanguage: `cn`,
         // option to redirect to `/ko` when connecting `/`
-        redirect: false,
-      },
+        redirect: false
+      }
     },
     {
       resolve: `@micalgenus/gatsby-plugin-github-avatar`,
       options: {
         username: `zicokuo`, // Github username
-        default: null, // Github userid for default image
-      },
+        default: null // Github userid for default image
+      }
     },
     {
       resolve: `gatsby-plugin-styled-components`,
       options: {
-        pure: true,
+        pure: true
         // Add any options here
-      },
+      }
     },
     {
       //    markdown 分类库
       resolve: "gatsby-plugin-categories",
       options: {
-        templatePath: `${__dirname}/src/pages/category.tsx`,
-      },
+        templatePath: `${__dirname}/src/pages/category.tsx`
+      }
     },
     {
       //    markdown 标签库
       resolve: "gatsby-plugin-tags",
       options: {
-        templatePath: `${__dirname}/src/pages/tag.tsx`,
-      },
+        templatePath: `${__dirname}/src/pages/tag.tsx`
+      }
     },
     // {
     //   //  gitalk 留言
@@ -267,12 +267,20 @@ module.exports = {
         enablePartialUpdates: true, // default: false
         matchFields: ["slug", "date", "title", "modified"], // Array<String> default: ['modified']
         concurrentQueries: true, // default: true
-        skipIndexing: true, // default: false, useful for e.g. preview deploys or local development
-      },
+        skipIndexing: true // default: false, useful for e.g. preview deploys or local development
+      }
     },
+    {
+      resolve: `gatsby-plugin-hotjar`,
+      options: {
+        includeInDevelopment: true, // optional parameter to include script in development
+        id: 2239420,
+        sv: 6
+      }
+    }
 
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
-  ],
+  ]
 }
