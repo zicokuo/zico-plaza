@@ -1,27 +1,32 @@
 import React from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import { useStaticQuery } from "gatsby"
 import { FormattedMessage, useIntl } from "gatsby-plugin-intl"
 import Layout from "../layouts/layout"
-import SEO from "../components/seo"
+import SEO from "../templates/common/seo"
 import {
   Card,
   CardActionArea,
-  CardMedia,
-  makeStyles,
-  CardContent,
-  Typography,
-  Grid,
-  Chip,
   CardActions,
+  CardContent,
+  CardMedia,
+  Chip,
   Container,
+  Grid,
+  makeStyles,
+  Typography,
 } from "@material-ui/core"
-import { WelcomeWidget } from "../sections/home/welcomeWidget"
-import FallingStart from "@/src/ui/common/fallingStarBgWidget"
-import tw from "twin.macro"
+import { WelcomeWidget } from "../templates/home/welcome-widget"
+import FallingStart from "@/src/templates/common/falling-star-widget"
+import {
+  postsQuery,
+  PostsQueryNode,
+  PostsQueryPostNode,
+} from "@/src/service/posts"
 
 const useStyles = makeStyles({
   root: {
     background: "transparent",
+    zIndex: 10,
   },
   postCard: {
     height: "100%",
@@ -42,7 +47,7 @@ const useStyles = makeStyles({
 
 const BlogIndexPage = ({ location }: { location: Location }) => {
   const intl = useIntl(),
-    data = useStaticQuery(pageQuery),
+    data: PostsQueryNode = postsQuery(),
     siteTitle = intl.formatMessage({
       id: data.site.siteMetadata?.title || `Title`,
     }),
@@ -67,14 +72,14 @@ const BlogIndexPage = ({ location }: { location: Location }) => {
     <Layout location={location} title={siteTitle}>
       <SEO title={intl.formatMessage({ id: `title` })} />
       <FallingStart />
-      <Container className={classes.root} css={[tw`z-10`]}>
+      <Container classes={classes}>
         <WelcomeWidget />
-        <Grid container spacing={4} justify={"stretch"}>
+        <Grid container spacing={4}>
           {posts
-            .filter(post => post.frontmatter?.visitable !== 0)
-            .map(function ({ id, frontmatter, fields }, key) {
+            .filter(post => post?.frontmatter?.visitable !== 0)
+            .map(({ id, frontmatter, fields }: PostsQueryPostNode, key) => {
               let thumb =
-                frontmatter.img ?? require(`../${fields.generatedCoverSlug}`)
+                frontmatter?.img ?? require(`../${fields?.generatedCoverSlug}`)
               return (
                 <Grid
                   item
@@ -90,31 +95,31 @@ const BlogIndexPage = ({ location }: { location: Location }) => {
                     className={classes.postCard}
                     elevation={3}
                   >
-                    <CardActionArea href={fields.slug}>
+                    <CardActionArea href={`${fields?.slug}`}>
                       <CardMedia
                         className={
                           key < 1 ? classes.mediaBig : classes.mediaCommon
                         }
                         image={thumb}
-                        title={frontmatter.title}
+                        title={`${frontmatter?.title}`}
                       />
                       <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
-                          {frontmatter.title}
+                          {`${frontmatter?.title}`}
                         </Typography>
                         <Typography
                           variant="body2"
                           color="textSecondary"
                           component="p"
                         >
-                          {frontmatter.date}
+                          {`${frontmatter?.date}`}
                         </Typography>
                         <Typography
                           variant="body2"
                           color="textSecondary"
                           component="p"
                         >
-                          {frontmatter.description}
+                          {`${frontmatter?.description}`}
                         </Typography>
                       </CardContent>
                     </CardActionArea>
@@ -124,10 +129,10 @@ const BlogIndexPage = ({ location }: { location: Location }) => {
                         color="textSecondary"
                         component="small"
                       >
-                        {frontmatter.tags.map((tag: String) => (
+                        {frontmatter?.tags?.map((tag: String) => (
                           <Chip
                             className={classes.postCardChip}
-                            key={`${frontmatter.id}-${tag}`}
+                            key={`${id}-${tag}`}
                             size={"small"}
                             clickable={true}
                             label={tag}
@@ -146,34 +151,3 @@ const BlogIndexPage = ({ location }: { location: Location }) => {
 }
 
 export default BlogIndexPage
-
-export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      posts: nodes {
-        id
-        excerpt
-        fields {
-          slug
-          generatedCoverSlug
-        }
-        frontmatter {
-          date(formatString: "MMMM DD, YYYY")
-          title
-          enTitle
-          author
-          visitable
-          description
-          enDescription
-          category
-          tags
-        }
-      }
-    }
-  }
-`

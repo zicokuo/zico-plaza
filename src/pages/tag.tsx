@@ -3,10 +3,10 @@ import React from "react"
 // Components
 import lodash from "lodash"
 import { graphql, useStaticQuery } from "gatsby"
-import { useAllTags } from "../hooks/tags-hooks"
+import { useAllTags } from "../hooks/tags"
 import Layout from "../layouts/layout"
 import { Link, useIntl } from "gatsby-plugin-intl"
-import SEO from "../components/seo"
+import SEO from "../templates/common/seo"
 
 const pageQuery = graphql`
   query($tag: String) {
@@ -35,7 +35,7 @@ export default ({ location }: any): JSX.Element => {
     data = useStaticQuery(pageQuery),
     { group } = useAllTags(),
     siteTitle = intl.formatMessage({
-      id: data?.site?.siteMetadata?.title || `Tags`
+      id: data?.site?.siteMetadata?.title || `Tags`,
     }),
     queries = location?.search.replace("?", ""),
     queriesTags = lodash.fromPairs(
