@@ -1,5 +1,4 @@
 import React from "react"
-import { useStaticQuery } from "gatsby"
 import { FormattedMessage, useIntl } from "gatsby-plugin-intl"
 import Layout from "../layouts/layout"
 import SEO from "../templates/common/seo"
@@ -16,7 +15,6 @@ import {
   Typography,
 } from "@material-ui/core"
 import { WelcomeWidget } from "../templates/home/welcome-widget"
-import FallingStart from "@/src/templates/common/falling-star-widget"
 import {
   postsQuery,
   PostsQueryNode,
@@ -71,7 +69,6 @@ const BlogIndexPage = ({ location }: { location: Location }) => {
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title={intl.formatMessage({ id: `title` })} />
-      <FallingStart />
       <Container classes={classes}>
         <WelcomeWidget />
         <Grid container spacing={4}>
