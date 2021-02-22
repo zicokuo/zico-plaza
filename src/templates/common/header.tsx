@@ -8,8 +8,7 @@ import SiteNavWidget from "./site-nav"
 import HeaderEmbedSearchComp from "@/src/templates/header/header-embed-search"
 import { ThemeConfigFace } from "@/src/theme/base.theme"
 import { sqSiteInfoData } from "@/src/graphql/site-info"
-import LangSwitchWidget from "@/src/templates/header/lang-switch"
-import { BuyMeCoffeeWidget } from "@/src/templates/header/buy-me-coffee"
+// import LangSwitchWidget from "@/src/templates/header/lang-switch"
 
 interface Props {
   /**
@@ -29,31 +28,30 @@ const ElevationScrollWrapper = (props: Props) => {
   const scrollTrigger = useScrollTrigger({
     disableHysteresis: true,
     threshold: 0,
-    target: window ? window() : undefined
+    target: window ? window() : undefined,
   })
 
   return React.cloneElement(children, {
-    elevation: scrollTrigger ? 4 : 0
+    elevation: scrollTrigger ? 4 : 0,
   })
 }
 const useStyles = makeStyles((theme: any) =>
   createStyles({
-    AppBar: {
-      height: 72
+    appBar: {
+      height: 72,
     },
     root: {
       position: "relative",
       maxWidth: "1200px",
       margin: "auto",
       justifyContent: "start",
-      backGround: theme?.colors?.background
     },
     item: {
-      margin: 6
+      margin: 6,
     },
-    HeaderLogo: {
-      backGround: theme?.colors?.cyan["500"]
-    }
+    headerAvatar: {
+      margin: 6,
+    },
   })
 )
 
@@ -67,7 +65,7 @@ const useStyles = makeStyles((theme: any) =>
 const HeaderWidget = (
   {
     title,
-    theme
+    theme,
   }: { isRootPath: boolean; title: string; theme: ThemeConfigFace },
   props: Props
 ) => {
@@ -75,12 +73,16 @@ const HeaderWidget = (
     pageTitle = site?.siteMetadata?.title || props?.title || "",
     classes = useStyles(theme),
     HeaderLogo = () => (
-      <Link className="header-link-home" to="/">
-        <Grid classes={classes} container alignItems={"center"}>
-          <Grid item>
-            <Avatar alt="avatar" src="/logo.png" />
+      <Link to="/">
+        <Grid className={classes.root} container alignItems={"center"}>
+          <Grid item className={classes.item}>
+            <Avatar
+              className={classes.headerAvatar}
+              alt="avatar"
+              src="/logo.png"
+            />
           </Grid>
-          <Grid item>
+          <Grid item className={classes.item}>
             <FormattedMessage id={`${pageTitle || title}`} />
           </Grid>
         </Grid>
@@ -89,16 +91,21 @@ const HeaderWidget = (
 
   return (
     <ElevationScrollWrapper {...props}>
-      <AppBar className={classes.AppBar} position={"sticky"} color={"inherit"}>
-        <Grid classes={classes} container alignItems={"center"} wrap={"nowrap"}>
-          <Grid item>
+      <AppBar className={classes.appBar} position={"sticky"} color={"inherit"}>
+        <Grid
+          className={classes.root}
+          container
+          alignItems={"center"}
+          wrap={"nowrap"}
+        >
+          <Grid item className={classes.item}>
             <HeaderLogo />
           </Grid>
-          <Grid item xs>
+          <Grid item xs className={classes.item}>
             <SiteNavWidget />
           </Grid>
 
-          <Grid item style={{ position: `relative` }}>
+          <Grid item style={{ position: `relative` }} className={classes.item}>
             <HeaderEmbedSearchComp isShow={false} />
           </Grid>
         </Grid>

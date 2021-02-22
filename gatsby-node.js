@@ -11,9 +11,9 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
         "@/src": path.resolve(__dirname, "./src"),
         "@/public": path.resolve(__dirname, "./public"),
         "@/content": path.resolve(__dirname, "./content"),
-        "@/intl": path.resolve(__dirname, "./intl")
-      }
-    }
+        "@/intl": path.resolve(__dirname, "./intl"),
+      },
+    },
   })
 }
 
@@ -67,8 +67,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         context: {
           id: post.id,
           previousPostId,
-          nextPostId
-        }
+          nextPostId,
+        },
       })
     })
   }
@@ -80,13 +80,13 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   if (node.internal.type === `MarkdownRemark`) {
     const value = createFilePath({
       node,
-      getNode
+      getNode,
     })
 
     createNodeField({
       name: `slug`,
       node,
-      value
+      value,
     })
 
     //  封面
@@ -100,13 +100,13 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       imgPath: "./src/thumbs",
       bgColor: lodash.toLower(
         thumbBgColor[lodash.random(0, thumbBgColor.length, false)]
-      )
+      ),
       // domain: "https://dillionmegida.com"
     })
     createNodeField({
       node,
       name: "generatedCoverSlug",
-      value: generatedCoverSlug
+      value: generatedCoverSlug,
     })
   }
 }

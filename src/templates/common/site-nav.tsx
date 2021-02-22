@@ -2,10 +2,10 @@ import { Grid, Toolbar } from "@material-ui/core"
 import { graphql, useStaticQuery } from "gatsby"
 import React from "react"
 import { Link } from "gatsby-plugin-intl"
-import { useStyles } from "@/src/hooks/styles"
+import { makeStyles } from "@material-ui/styles"
 
 const drawerWidth = 75,
-  styles = {
+  useStyles = makeStyles({
     root: {},
     drawer: {
       width: drawerWidth + "vw",
@@ -13,10 +13,10 @@ const drawerWidth = 75,
     navItem: {
       margin: 4,
     },
-  }
+  })
 const SiteNavWidget = ({}) => {
   const { site } = useStaticQuery(pageQuery),
-    classes = useStyles(styles),
+    classes = useStyles(),
     siteNav = site?.siteMetadata?.siteNav ?? []
 
   return (
