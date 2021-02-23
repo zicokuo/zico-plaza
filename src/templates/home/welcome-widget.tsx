@@ -1,17 +1,18 @@
 import React from "react"
 import { FormattedMessage } from "gatsby-plugin-intl"
-import { colors, Grid, makeStyles, Paper, Typography } from "@material-ui/core"
+import { Grid, makeStyles, Theme, Typography } from "@material-ui/core"
 import { BuyMeCoffeeWidget } from "@/src/templates/header/buy-me-coffee"
+import { ThemeConfigFace } from "@/src/theme/base.theme"
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Partial<ThemeConfigFace>) => ({
   root: {
     margin: "4% 0",
     padding: "5%",
-    background: colors.lightBlue.A100,
+    background: theme.colors.main,
     borderRadius: 8,
   },
   item: {},
-})
+}))
 export const WelcomeWidget = () => {
   const classes = useStyles()
   return (

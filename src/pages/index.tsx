@@ -9,6 +9,7 @@ import {
   CardContent,
   CardMedia,
   Chip,
+  CircularProgress,
   Container,
   Grid,
   makeStyles,
@@ -30,7 +31,6 @@ const useStyles = makeStyles({
   },
   postCard: {
     height: "100%",
-    margin: 2,
   },
   postCardChip: {
     margin: 2,
@@ -84,88 +84,95 @@ const BlogIndexPage = ({ location }: { location: Location }) => {
       <SEO title={intl.formatMessage({ id: `title` })} />
       <Container classes={classes}>
         <WelcomeWidget />
-        <Grid container spacing={4} direction="row">
-          <InfiniteScroll
-            dataLength={pagePosts.length}
-            next={nextPagePosts}
-            hasMore={pagePosts.length < pageSize * (curPage + 1)}
-            loader={<p>Loading...</p>}
-            endMessage={<p>No more item...</p>}
-            pullDownToRefresh={true}
-            refreshFunction={() => setCurPage(1)}
-          >
-            {pagePosts
-              // .filter(post => post?.frontmatter?.visitable !== 0)
-              .map(({ id, frontmatter, fields }: PostsQueryPostNode, key) => {
-                let thumb =
-                  frontmatter?.img ??
-                  require(`../${fields?.generatedCoverSlug}`)
-                return (
-                  <Grid
-                    item
-                    key={id}
-                    md={key < 1 ? 12 : 4}
-                    xs={12}
-                    style={{
-                      height: "auto",
-                    }}
+        <InfiniteScroll
+          style={{ display: "flex", flexWrap: "wrap", overflow: "hidden" }}
+          dataLength={pagePosts.length}
+          next={nextPagePosts}
+          hasMore={pagePosts.length > pageSize * (curPage - 1)}
+          loader={
+            <Grid container justify={"center"}>
+              <CircularProgress />
+            </Grid>
+          }
+          endMessage={
+            <Grid container justify={"center"}>
+              -- the end --
+            </Grid>
+          }
+          pullDownToRefresh={true}
+          refreshFunction={() => setCurPage(1)}
+        >
+          {pagePosts
+            // .filter(post => post?.frontmatter?.visitable !== 0)
+            .map(({ id, frontmatter, fields }: PostsQueryPostNode, key) => {
+              let thumb =
+                frontmatter?.img ?? require(`../${fields?.generatedCoverSlug}`)
+              return (
+                <Grid
+                  item
+                  key={id}
+                  md={key < 1 ? 8 : 4}
+                  xs={12}
+                  style={{
+                    height: "auto",
+                    padding: "1em",
+                  }}
+                >
+                  <Card
+                    key={`postCard-${id}`}
+                    className={classes.postCard}
+                    elevation={3}
                   >
-                    <Card
-                      key={`postCard-${id}`}
-                      className={classes.postCard}
-                      elevation={3}
-                    >
-                      <CardActionArea href={`${fields?.slug}`}>
-                        <CardMedia
-                          className={
-                            key < 1 ? classes.mediaBig : classes.mediaCommon
-                          }
-                          image={thumb}
-                          title={`${frontmatter?.title}`}
-                        />
-                        <CardContent>
-                          <Typography gutterBottom variant="h5" component="h2">
-                            {`${frontmatter?.title}`}
-                          </Typography>
-                          <Typography
-                            variant="body2"
-                            color="textSecondary"
-                            component="p"
-                          >
-                            {`${frontmatter?.date}`}
-                          </Typography>
-                          <Typography
-                            variant="body2"
-                            color="textSecondary"
-                            component="p"
-                          >
-                            {`${frontmatter?.description}`}
-                          </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                      <CardActions>
+                    <CardActionArea href={`${fields?.slug}`}>
+                      <CardMedia
+                        className={
+                          key < 1 ? classes.mediaBig : classes.mediaCommon
+                        }
+                        image={thumb}
+                        title={`${frontmatter?.title}`}
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                          {`${frontmatter?.title}`}
+                        </Typography>
                         <Typography
                           variant="body2"
                           color="textSecondary"
-                          component="small"
+                          component="p"
                         >
-                          {frontmatter?.tags?.map((tag: String) => (
-                            <Chip
-                              className={classes.postCardChip}
-                              key={`${id}-${tag}`}
-                              size={"small"}
-                              clickable={true}
-                              label={tag}
-                            />
-                          ))}
+                          {`${frontmatter?.date}`}
                         </Typography>
-                      </CardActions>
-                    </Card>
-                  </Grid>
-                )
-              })}
-          </InfiniteScroll>
-        </Grid>
+                        <Typography
+                          variant="body2"
+                          color="textSecondary"
+                          component="p"
+                        >
+                          {`${frontmatter?.description}`}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                    <CardActions>
+                      <Typography
+                        variant="body2"
+                        color="textSecondary"
+                        component="small"
+                      >
+                        {frontmatter?.tags?.map((tag: String) => (
+                          <Chip
+                            className={classes.postCardChip}
+                            key={`${id}-${tag}`}
+                            size={"small"}
+                            clickable={true}
+                            label={tag}
+                          />
+                        ))}
+                      </Typography>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              )
+            })}
+        </InfiniteScroll>
       </Container>
     </Layout>
   )

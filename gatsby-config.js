@@ -7,6 +7,8 @@
  * @FilePath: \zico-plaza\gatsby-config.js
  */
 
+import { themeConfig } from "./src/theme/base.theme"
+
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
@@ -285,7 +287,7 @@ module.exports = {
         //   excludePaths: ["/blog/beep-beep-lettuce"],
         height: 3,
         //   prependToBody: false,
-        color: `#000000`,
+        color: themeConfig.colors.main,
         footerHeight: 500,
       },
     },

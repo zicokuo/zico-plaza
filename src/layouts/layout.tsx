@@ -6,6 +6,7 @@ import FooterWidget from "../templates/common/footer"
 import { useIntl } from "gatsby-plugin-intl"
 import { graphql, useStaticQuery } from "gatsby"
 import { themeConfig } from "@/src/theme/base.theme"
+import { ThemeProvider } from "@material-ui/styles"
 
 const Layout = ({
   location,
@@ -26,7 +27,7 @@ const Layout = ({
   })
 
   return (
-    <>
+    <ThemeProvider theme={themeConfig}>
       <HeaderWidget
         title={siteTitle?.toString() ?? ""}
         theme={theme}
@@ -36,7 +37,7 @@ const Layout = ({
         <main>{children}</main>
       </div>
       <FooterWidget />
-    </>
+    </ThemeProvider>
   )
 }
 

@@ -1,19 +1,22 @@
-import { colors } from "@material-ui/core"
+import { colors, createMuiTheme, Theme } from "@material-ui/core"
 
 const BLACK = "#333333",
   GREY = "#f7f7f7",
-  MAIN = "#283047"
+  MAIN = colors.lightBlue["100"]
 
-export interface ThemeConfigFace {
-  colors: {}
+export interface ThemeConfigFace extends Theme {
+  colors: any
 }
 
-export const themeConfig: ThemeConfigFace = {
-  colors: {
-    ...colors,
-    background: BLACK,
-    font: BLACK,
-    areaBackground: GREY,
-    main: MAIN,
-  },
-}
+export const themeConfig: Partial<ThemeConfigFace> = createMuiTheme(
+  {},
+  {
+    colors: {
+      ...colors,
+      background: BLACK,
+      font: BLACK,
+      areaBackground: GREY,
+      main: MAIN,
+    },
+  }
+)
